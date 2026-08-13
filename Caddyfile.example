@@ -1,0 +1,18 @@
+# DOMIXI 域名路由示例（Caddy 自动签发 HTTPS）
+#
+# 用户访问路径：
+#   domixi.com              → 品牌官网（Next.js，:3001）
+#   console.domixi.com      → New API 用户控制台（:3000，注册/登录/充值/令牌）
+#   token-service.domixi.com → New API 网关（:3000，程序调用的 base_url）
+
+domixi.com, www.domixi.com {
+    reverse_proxy 127.0.0.1:3001
+}
+
+console.domixi.com {
+    reverse_proxy 127.0.0.1:3000
+}
+
+token-service.domixi.com {
+    reverse_proxy 127.0.0.1:3000
+}
