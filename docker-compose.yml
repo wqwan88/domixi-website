@@ -3,6 +3,7 @@ version: "3.4"
 # 品牌官网服务；New API 本体在 ../new-api/docker-compose.yml
 services:
   domixi-web:
+    image: domixi-web
     build: .
     container_name: domixi-web
     restart: always
@@ -10,4 +11,4 @@ services:
       - "3001:3000"
     environment:
       # New API 控制台地址，浏览器会跳转过去，填公网可访问的域名
-      - NEXT_PUBLIC_CONSOLE_URL=http://localhost:3000
+      - NEXT_PUBLIC_CONSOLE_URL=https://console.ai-domixi.com

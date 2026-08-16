@@ -1,0 +1,271 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "DOMIXI API",
+    "version": "1.0.0",
+    "description": "OpenAI 兼容的大模型网关。把客户端的 base_url 换成 `https://token-service.ai-domixi.com/v1`，使用控制台生成的令牌即可调用 50+ 模型。\n\n在控制台创建令牌：https://console.ai-domixi.com/token"
+  },
+  "servers": [
+    {
+      "url": "https://token-service.ai-domixi.com",
+      "description": "Production"
+    }
+  ],
+  "tags": [
+    { "name": "Chat", "description": "对话补全" },
+    { "name": "Claude", "description": "Anthropic 原生格式" },
+    { "name": "Embeddings", "description": "文本向量" },
+    { "name": "Images", "description": "图像生成" },
+    { "name": "Models", "description": "模型列表" }
+  ],
+  "security": [{ "bearerAuth": [] }],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "API Key",
+        "description": "控制台生成的 sk- 令牌"
+      }
+    },
+    "schemas": {
+      "ChatMessage": {
+        "type": "object",
+        "required": ["role", "content"],
+        "properties": {
+          "role": { "type": "string", "enum": ["system", "user", "assistant"] },
+          "content": { "type": "string" }
+        }
+      },
+      "ChatRequest": {
+        "type": "object",
+        "required": ["model", "messages"],
+        "properties": {
+          "model": { "type": "string", "example": "deepseek-v4" },
+          "messages": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ChatMessage" }
+          },
+          "temperature": { "type": "number", "minimum": 0, "maximum": 2 },
+          "max_tokens": { "type": "integer" },
+          "stream": { "type": "boolean", "default": false }
+        }
+      },
+      "ChatChoice": {
+        "type": "object",
+        "properties": {
+          "index": { "type": "integer" },
+          "message": { "$ref": "#/components/schemas/ChatMessage" },
+          "finish_reason": { "type": "string" }
+        }
+      },
+      "Usage": {
+        "type": "object",
+        "properties": {
+          "prompt_tokens": { "type": "integer" },
+          "completion_tokens": { "type": "integer" },
+          "total_tokens": { "type": "integer" }
+        }
+      },
+      "ChatResponse": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "object": { "type": "string", "example": "chat.completion" },
+          "model": { "type": "string" },
+          "choices": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ChatChoice" }
+          },
+          "usage": { "$ref": "#/components/schemas/Usage" }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "message": { "type": "string" },
+              "type": { "type": "string" },
+              "code": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/v1/chat/completions": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "对话补全",
+        "description": "OpenAI Chat Completions 兼容接口。stream=true 时返回 SSE。",
+        "operationId": "createChatCompletion",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ChatRequest" },
+              "example": {
+                "model": "deepseek-v4",
+                "messages": [{ "role": "user", "content": "你好" }]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/ChatResponse" } }
+            }
+          },
+          "401": { "description": "令牌无效", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "402": { "description": "余额不足", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "429": { "description": "速率或额度限制", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/messages": {
+      "post": {
+        "tags": ["Claude"],
+        "summary": "Claude 原生 Messages",
+        "description": "Anthropic Messages API 兼容。适合已有 Claude SDK 的项目。",
+        "operationId": "createClaudeMessage",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["model", "max_tokens", "messages"],
+                "properties": {
+                  "model": { "type": "string", "example": "claude-sonnet-4-5" },
+                  "max_tokens": { "type": "integer", "example": 1024 },
+                  "messages": {
+                    "type": "array",
+                    "items": { "$ref": "#/components/schemas/ChatMessage" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "成功" },
+          "401": { "description": "令牌无效" }
+        }
+      }
+    },
+    "/v1/embeddings": {
+      "post": {
+        "tags": ["Embeddings"],
+        "summary": "文本向量化",
+        "operationId": "createEmbedding",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["model", "input"],
+                "properties": {
+                  "model": { "type": "string", "example": "text-embedding-3-small" },
+                  "input": {
+                    "oneOf": [
+                      { "type": "string" },
+                      { "type": "array", "items": { "type": "string" } }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "成功" } }
+      }
+    },
+    "/v1/images/generations": {
+      "post": {
+        "tags": ["Images"],
+        "summary": "图像生成",
+        "operationId": "createImage",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["model", "prompt"],
+                "properties": {
+                  "model": { "type": "string" },
+                  "prompt": { "type": "string" },
+                  "n": { "type": "integer", "default": 1 },
+                  "size": { "type": "string", "example": "1024x1024" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "成功" } }
+      }
+    },
+    "/v1/rerank": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Rerank",
+        "operationId": "rerank",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "model": { "type": "string" },
+                  "query": { "type": "string" },
+                  "documents": { "type": "array", "items": { "type": "string" } }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "成功" } }
+      }
+    },
+    "/v1/models": {
+      "get": {
+        "tags": ["Models"],
+        "summary": "列出可用模型",
+        "operationId": "listModels",
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "object": { "type": "string", "example": "list" },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "string" },
+                          "object": { "type": "string" },
+                          "owned_by": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

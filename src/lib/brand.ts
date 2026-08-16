@@ -4,11 +4,11 @@ export const brand = {
   tagline: "一个密钥，调用全球大模型",
   description:
     "DOMIXI 是统一的大模型 API 网关：聚合 OpenAI、Claude、Gemini、DeepSeek 等 50+ 模型，OpenAI 兼容接口，按量计费，用量全透明。",
-  domain: "domixi.com",
+  domain: "ai-domixi.com",
   // 用户控制台（New API）：注册 / 登录 / 充值 / 令牌 / 用量
   consoleUrl: process.env.NEXT_PUBLIC_CONSOLE_URL ?? "http://localhost:3000",
   // 程序调用的 base_url（New API /api/status 里登记的地址）
-  gatewayUrl: "https://token-service.domixi.com/v1",
+  gatewayUrl: "https://token-service.ai-domixi.com/v1",
   docsEmail: "support@domixi.com",
   icp: "", // 备案号占位，如 "京ICP备XXXXXXXX号"
 
@@ -52,7 +52,7 @@ export const brand = {
 
 client = OpenAI(
     api_key="sk-xxxxxxxxxxxxxxxx",   # 控制台生成的令牌
-    base_url="https://token-service.domixi.com/v1"
+    base_url="https://token-service.ai-domixi.com/v1"
 )
 
 resp = client.chat.completions.create(
@@ -61,7 +61,7 @@ resp = client.chat.completions.create(
 )
 print(resp.choices[0].message.content)`,
 
-  curlExample: `curl https://token-service.domixi.com/v1/chat/completions \\
+  curlExample: `curl https://token-service.ai-domixi.com/v1/chat/completions \\
   -H "Authorization: Bearer sk-你的密钥" \\
   -H "Content-Type: application/json" \\
   -d '{"model": "deepseek-v4", "messages": [{"role": "user", "content": "你好"}]}'`,

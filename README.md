@@ -7,19 +7,19 @@ DOMIXI 中转站的品牌门面站（Next.js + Tailwind）。
 
 ```
 ┌────────────────────────────────────────────────────┐
-│  domixi.com (本站, Next.js :3001)                 │
+│  ai-domixi.com (本站, Next.js :3001)              │
 │  品牌首页 / 定价 / 特性 / 快速接入 / FAQ / API 文档   │
 └──────────────┬─────────────────────────────────────┘
                │ "免费注册" / "登录" 按钮跳转
                ▼
 ┌────────────────────────────────────────────────────┐
-│  console.domixi.com (New API :3000)               │
+│  console.ai-domixi.com (New API :3000)            │
 │  注册 · 登录 · 充值(EPay/Stripe) · 令牌 · 用量仪表盘  │
 └────────────────────────────────────────────────────┘
                ▲
                │ 程序调用 base_url
 ┌──────────────┴─────────────────────────────────────┐
-│  token-service.domixi.com/v1 (New API :3000)      │
+│  token-service.ai-domixi.com/v1 (New API :3000)   │
 │  实际 API 转发网关（已在 /api/status 登记）           │
 └────────────────────────────────────────────────────┘
 ```
@@ -50,9 +50,9 @@ docker compose up -d --build   # 官网跑在 :3001
 
 ## 上线 Checklist
 
-- [ ] `NEXT_PUBLIC_CONSOLE_URL` 指向生产 New API 地址（https，如 console.domixi.com）
+- [ ] `NEXT_PUBLIC_CONSOLE_URL` 指向生产 New API 地址（https，如 console.ai-domixi.com）
 - [ ] 替换占位价格（`brand.models`）为实际倍率折算价（当前汇率系数 7.3，见 /api/status price）
 - [ ] 填写备案号 `brand.icp`（国内服务器必需）
-- [ ] 服务条款 / 隐私政策 / AUP 三个页面补内容
-- [ ] New API 后台 → 设置 → 上传同一 logo.svg，保持品牌一致
-- [ ] New API 后台 → 设置 → 首页内容：嵌入官网地址或自定义 HTML
+- [x] 服务条款 / 隐私政策 / AUP 三个页面补内容
+- [x] New API 后台 logo 已换成 DOMIXI 图标
+- [x] New API 后台 → 设置 → 首页内容：嵌入官网地址或自定义 HTML

@@ -128,3 +128,8 @@ table.price-table tbody tr:hover {
 ::selection {
   background: rgba(91, 140, 255, 0.4);
 }
+
+/* 被控制台 iframe 内嵌时隐藏本站导航，避免与控制台导航重叠 */
+html.framed header {
+  display: none;
+}

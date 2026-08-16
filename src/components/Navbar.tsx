@@ -26,26 +26,26 @@ export default function Navbar({ lang }: { lang: Lang }) {
     >
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 h-16">
         <Link href={langPath(lang)} className="flex items-center gap-2.5">
-          <img src="/logo.svg" alt="DOMIXI" className="w-8 h-8" />
+          <img src="/domixi.svg" alt="DOMIXI" className="w-8 h-8" />
           <span className="font-bold text-lg tracking-tight">DOMIXI</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8 text-sm text-white/70">
+          <Link href={langPath(lang)} className="hover:text-white transition-colors">
+            {t.nav.home}
+          </Link>
           <Link href={langPath(lang, "/#models")} className="hover:text-white transition-colors">
-            {t.nav.models}
-          </Link>
-          <Link href={langPath(lang, "/#features")} className="hover:text-white transition-colors">
-            {t.nav.features}
-          </Link>
-          <Link href={langPath(lang, "/#quickstart")} className="hover:text-white transition-colors">
-            {t.nav.quickstart}
-          </Link>
-          <Link href={langPath(lang, "/#faq")} className="hover:text-white transition-colors">
-            {t.nav.faq}
+            {t.nav.plaza}
           </Link>
           <Link href={langPath(lang, "/docs")} className="hover:text-white transition-colors">
             {t.nav.docs}
           </Link>
+          <Link href={langPath(lang, "/#faq")} className="hover:text-white transition-colors">
+            {t.nav.faq}
+          </Link>
+          <a href={brand.consoleUrl + "/console"} className="hover:text-white transition-colors">
+            {t.nav.console}
+          </a>
         </div>
 
         <div className="flex items-center gap-3">
