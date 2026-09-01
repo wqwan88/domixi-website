@@ -1,4 +1,4 @@
-import { type Lang, getDict, langPath } from "@/lib/i18n";
+import { type Lang, getDict, langPath, consoleHref } from "@/lib/i18n";
 import { brand } from "@/lib/brand";
 
 export default function Hero({ lang }: { lang: Lang }) {
@@ -28,7 +28,7 @@ export default function Hero({ lang }: { lang: Lang }) {
 
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href={brand.consoleUrl + "/register"}
+            href={consoleHref(lang, "/register")}
             className="btn-primary px-8 py-3.5 text-base w-full sm:w-auto"
           >
             {t.hero.cta} →

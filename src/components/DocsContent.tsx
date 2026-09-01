@@ -1,4 +1,4 @@
-import { type Lang, getDict } from "@/lib/i18n";
+import { type Lang, getDict, consoleHref } from "@/lib/i18n";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { brand } from "@/lib/brand";
@@ -33,7 +33,7 @@ export default function DocsContent({ lang }: { lang: Lang }) {
           <code className="text-sm text-cyan-300">Authorization: Bearer sk-***</code>
           <p className="text-white/50 text-sm mt-3">
             {t.docs.authDesc}{" "}
-            <a href={brand.consoleUrl + "/token"} className="text-blue-300 underline underline-offset-4">
+            <a href={consoleHref(lang, "/token")} className="text-blue-300 underline underline-offset-4">
               {consoleLabel}
             </a>
           </p>

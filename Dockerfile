@@ -1,5 +1,7 @@
 FROM node:22-alpine AS deps
 WORKDIR /app
+# better-sqlite3 在 musl (alpine) 上需要本地编译，装构建工具链后会自动编译到 .next/standalone
+RUN apk add --no-cache python3 make g++
 COPY package*.json ./
 RUN npm ci
 

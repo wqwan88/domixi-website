@@ -12,3 +12,17 @@ services:
     environment:
       # New API 控制台地址，浏览器会跳转过去，填公网可访问的域名
       - NEXT_PUBLIC_CONSOLE_URL=https://console.ai-domixi.com
+      # M-Pesa Daraja 凭证与回调（.env 不入库，生产在服务器上维护）
+      - MPESA_CONSUMER_KEY=${MPESA_CONSUMER_KEY:***
+      - MPESA_CONSUMER_SECRET=${MPESA_CONSUMER_SECRET:***
+      - MPESA_PASSKEY=${MPESA_PASSKEY:***
+      - MPESA_SHORTCODE=${MPESA_SHORTCODE:-174379}
+      - MPESA_ENV=${MPESA_ENV:-sandbox}
+      - MPESA_CALLBACK_URL=${MPESA_CALLBACK_URL:-https://ai-domixi.com/api/mpesa/callback}
+      - MPESA_DB_PATH=/app/data/mpesa.db
+    volumes:
+      # SQLite 订单数据持久化（容器重建不丢）
+      - domixi_mpesa_data:/app/data
+
+volumes:
+  domixi_mpesa_data:

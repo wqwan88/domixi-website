@@ -1,3 +1,4 @@
+import { brand } from "./brand";
 import en from "./translations/en";
 import fr from "./translations/fr";
 import ru from "./translations/ru";
@@ -36,10 +37,32 @@ export function langPath(lang: Lang, path: string = ""): string {
 export function langSwitchUrl(currentPath: string, target: Lang): string {
   // Strip current language prefix
   const stripped = currentPath.replace(/^\/(en|fr|ru|ja|vi|zh-TW)(\/|$)/, "/");
-  if (target === "zh") return stripped;
-  return `/${target}${stripped === "/" ? "" : stripped}`;
+  const path = target === "zh" ? stripped : `/${target}${stripped === "/" ? "" : stripped}`;
+  const url = new URL(path || "/", "https://ai-domixi.com");
+  url.searchParams.set("set_lang", target);
+  return `${url.pathname}${url.search}`;
 }
 
 export function getHtmlLang(lang: Lang): string {
   return languages.find((l) => l.code === lang)?.htmlLang ?? "en";
+}
+
+/** New API i18next codes (localStorage `i18nextLng`). */
+const CONSOLE_LNG: Record<Lang, string> = {
+  zh: "zhCN",
+  en: "en",
+  fr: "fr",
+  ru: "ru",
+  ja: "ja",
+  vi: "vi",
+  "zh-TW": "zhTW",
+};
+
+/** Console URL that carries the website language onto login/register/etc. */
+export function consoleHref(lang: Lang, path: string = "/"): string {
+  const base = brand.consoleUrl.replace(/\/$/, "");
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  const url = new URL(normalized, `${base}/`);
+  url.searchParams.set("lng", CONSOLE_LNG[lang]);
+  return url.toString();
 }

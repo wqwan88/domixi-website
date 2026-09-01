@@ -1,4 +1,4 @@
-import { type Lang, getDict, langPath } from "@/lib/i18n";
+import { type Lang, getDict, consoleHref } from "@/lib/i18n";
 import { brand } from "@/lib/brand";
 
 export default function ModelsTable({ lang }: { lang: Lang }) {
@@ -42,7 +42,7 @@ export default function ModelsTable({ lang }: { lang: Lang }) {
       </div>
 
       <p className="text-center mt-10">
-        <a href={brand.consoleUrl + "/pricing"} className="text-sm text-blue-300 hover:text-blue-200 underline underline-offset-4">
+        <a href={consoleHref(lang, "/pricing")} className="text-sm text-blue-300 hover:text-blue-200 underline underline-offset-4">
           {t.models.viewAll}
         </a>
       </p>

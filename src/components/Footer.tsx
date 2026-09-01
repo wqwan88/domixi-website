@@ -1,4 +1,4 @@
-import { type Lang, getDict, langPath } from "@/lib/i18n";
+import { type Lang, getDict, langPath, consoleHref } from "@/lib/i18n";
 import { brand } from "@/lib/brand";
 
 export default function Footer({ lang }: { lang: Lang }) {
@@ -19,7 +19,7 @@ export default function Footer({ lang }: { lang: Lang }) {
           <ul className="space-y-2 text-white/40">
             <li><a href={langPath(lang, "/#models")} className="hover:text-white transition-colors">{t.footer.models}</a></li>
             <li><a href={langPath(lang, "/docs")} className="hover:text-white transition-colors">{t.footer.docs}</a></li>
-            <li><a href={brand.consoleUrl} className="hover:text-white transition-colors">{t.footer.console}</a></li>
+            <li><a href={consoleHref(lang)} className="hover:text-white transition-colors">{t.footer.console}</a></li>
           </ul>
         </div>
         <div>

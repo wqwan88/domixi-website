@@ -12,14 +12,18 @@ export const brand = {
   docsEmail: "support@domixi.com",
   icp: "", // 备案号占位，如 "京ICP备XXXXXXXX号"
 
+  // 定价策略：官方 API 价格 × 7.3 汇率 × 0.8（8 折），取整
+  // 数据来源：OpenAI / Anthropic / DeepSeek / Kimi 官方定价页（2026-08）
   models: [
-    { vendor: "OpenAI",    name: "GPT-5 / GPT-4o",        priceIn: "¥2.0 / 1M tokens",  priceOut: "¥8.0 / 1M tokens",  tag: "热门" },
-    { vendor: "Anthropic", name: "Claude Sonnet 4.5",     priceIn: "¥3.0 / 1M tokens",  priceOut: "¥15.0 / 1M tokens", tag: "编码强" },
-    { vendor: "Google",    name: "Gemini 2.5 Pro",        priceIn: "¥1.25 / 1M tokens", priceOut: "¥10.0 / 1M tokens", tag: "长上下文" },
-    { vendor: "DeepSeek",  name: "DeepSeek V4",           priceIn: "¥0.27 / 1M tokens", priceOut: "¥1.1 / 1M tokens",  tag: "极致性价比" },
-    { vendor: "DeepSeek",  name: "DeepSeek V4 Flash · 海外", priceIn: "¥0.55 / 1M tokens", priceOut: "¥2.2 / 1M tokens", tag: "合规出境" },
-    { vendor: "阿里",       name: "Qwen3 Max",             priceIn: "¥0.5 / 1M tokens",  priceOut: "¥2.0 / 1M tokens",  tag: "国产" },
-    { vendor: "Moonshot",  name: "Kimi K2",               priceIn: "¥0.6 / 1M tokens",  priceOut: "¥2.4 / 1M tokens",  tag: "长文本" },
+    { vendor: "OpenAI",    name: "GPT-5",                   priceIn: "¥7 / 1M tokens",   priceOut: "¥58 / 1M tokens",  tag: "热门" },
+    { vendor: "OpenAI",    name: "GPT-4o",                  priceIn: "¥15 / 1M tokens",  priceOut: "¥58 / 1M tokens",  tag: "通用" },
+    { vendor: "Anthropic", name: "Claude Sonnet 5",        priceIn: "¥12 / 1M tokens",  priceOut: "¥58 / 1M tokens",  tag: "最新" },
+    { vendor: "Anthropic", name: "Claude Sonnet 4.5",      priceIn: "¥18 / 1M tokens",  priceOut: "¥88 / 1M tokens",  tag: "编码强" },
+    { vendor: "Google",    name: "Gemini 2.5 Pro",         priceIn: "¥7 / 1M tokens",   priceOut: "¥58 / 1M tokens",  tag: "长上下文" },
+    { vendor: "DeepSeek",  name: "DeepSeek V4 Pro",        priceIn: "¥3 / 1M tokens",   priceOut: "¥23 / 1M tokens",  tag: "极致性价比" },
+    { vendor: "DeepSeek",  name: "DeepSeek V4 Flash · 海外", priceIn: "¥1.5 / 1M tokens", priceOut: "¥12 / 1M tokens", tag: "合规出境" },
+    { vendor: "阿里",       name: "Qwen3 Max",              priceIn: "¥1 / 1M tokens",   priceOut: "¥4 / 1M tokens",   tag: "国产" },
+    { vendor: "Moonshot",  name: "Kimi K3",                priceIn: "¥18 / 1M tokens",  priceOut: "¥88 / 1M tokens",  tag: "长文本" },
   ],
 
   features: [
@@ -39,7 +43,7 @@ export const brand = {
   ],
 
   faq: [
-    { q: "和官方 API 有什么区别？", a: "我们是聚合网关：你在 DOMIXI 拿一个 Key，就能调所有支持的模型。计费按官方价格透明折算，我们只收取极低的服务费率。" },
+    { q: "和官方 API 有什么区别？", a: "我们是聚合网关：你在 DOMIXI 拿一个 Key，就能调所有支持的模型。所有模型定价均为官方 API 价格的 8 折（按实时汇率折算人民币），按量计费，用量全透明。" },
     { q: "DeepSeek V4 Flash 海外版是什么？", a: "从汕头物理隔离园区合规出境的 DeepSeek 推理节点，通过香港出海服务海外用户，可享受出海合规保障，适合有跨境业务的企业客户。" },
     { q: "数据安全吗？", a: "DOMIXI 只做请求转发，不存储任何对话内容。所有请求日志仅保留 token 用量元数据，用于计费。" },
     { q: "支持哪些支付方式？", a: "支付宝、微信支付（通过易支付），以及 Stripe（Visa / MasterCard）。企业客户可对公转账。" },

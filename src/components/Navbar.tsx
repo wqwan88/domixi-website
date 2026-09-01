@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type Lang, languages, getDict, langPath, langSwitchUrl } from "@/lib/i18n";
-import { brand } from "@/lib/brand";
+import { type Lang, languages, getDict, langPath, langSwitchUrl, consoleHref } from "@/lib/i18n";
 
 export default function Navbar({ lang }: { lang: Lang }) {
   const [scrolled, setScrolled] = useState(false);
@@ -43,7 +42,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
           <Link href={langPath(lang, "/#faq")} className="hover:text-white transition-colors">
             {t.nav.faq}
           </Link>
-          <a href={brand.consoleUrl + "/console"} className="hover:text-white transition-colors">
+          <a href={consoleHref(lang, "/console")} className="hover:text-white transition-colors">
             {t.nav.console}
           </a>
         </div>
@@ -76,13 +75,13 @@ export default function Navbar({ lang }: { lang: Lang }) {
           </div>
 
           <a
-            href={brand.consoleUrl + "/login"}
+            href={consoleHref(lang, "/login")}
             className="text-sm text-white/80 hover:text-white transition-colors px-3 py-2"
           >
             {t.nav.login}
           </a>
           <a
-            href={brand.consoleUrl + "/register"}
+            href={consoleHref(lang, "/register")}
             className="btn-primary text-sm px-4 py-2"
           >
             {t.nav.register}

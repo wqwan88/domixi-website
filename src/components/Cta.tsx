@@ -1,5 +1,4 @@
-import { type Lang, getDict } from "@/lib/i18n";
-import { brand } from "@/lib/brand";
+import { type Lang, getDict, consoleHref } from "@/lib/i18n";
 
 export default function Cta({ lang }: { lang: Lang }) {
   const t = getDict(lang);
@@ -12,7 +11,7 @@ export default function Cta({ lang }: { lang: Lang }) {
           {t.cta.title} <span className="prism-text">DOMIXI</span>
         </h2>
         <p className="text-white/50 mt-4 mb-10">{t.cta.subtitle}</p>
-        <a href={brand.consoleUrl + "/register"} className="btn-primary px-10 py-4 text-lg inline-block">
+        <a href={consoleHref(lang, "/register")} className="btn-primary px-10 py-4 text-lg inline-block">
           {t.cta.button}
         </a>
       </div>

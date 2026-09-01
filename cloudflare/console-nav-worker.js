@@ -1,11 +1,14 @@
+import { buildLocaleBootScript } from "./locale-boot.js";
+
 /**
  * DOMIXI console 导航修补 Worker
  *
  * 部署在 console.ai-domixi.com/* 路由上。New API 前端把顶部导航的顺序和
- * 文字写死在代码里（无配置项），本 Worker 在 HTML 响应里注入一段脚本，
- * 在浏览器端完成两件事：
- *   1. 把「文档」改名为「API文档」（英文界面 Docs → API Docs）；
- *   2. 导航顺序调整为：主页 → 模型广场 → API文档 → 排行榜 → 控制台。
+ * 文字写死在代码里（无配置项），本 Worker 在 HTML 响应里注入脚本，
+ * 在浏览器端完成四件事：
+ *   1. 读取 ?lng= 或在无偏好时按 IP 国家写入 i18nextLng（须在 React 启动前）；
+ *   2. 把「文档」改名为「API文档」（英文界面 Docs → API Docs）；
+ *   3. 导航顺序调整为：主页 → 模型广场 → API文档 → 排行榜 → 控制台。
  *
  * 用 MutationObserver 对抗 React 重渲染；已处于目标状态时不做任何 DOM
  * 修改，避免观察器死循环。New API 大版本升级若改了导航 DOM 结构，
@@ -20,6 +23,12 @@ const LOGO_PROXY = {
   "/logo.svg": "/logo.svg",
   "/favicon.ico": "/favicon.ico",
 };
+
+// New API 只从 localStorage / navigator 读语言，不认 querystring。
+// 官网跳转带 ?lng=；否则按 request.cf.country 推断默认语言。
+function langSyncScript(country) {
+  return `<script>${buildLocaleBootScript(country)}</script>`;
+}
 
 const NAV_FIX_SCRIPT = `<script>(function () {
   var RENAMES = { "文档": "API文档", "Docs": "API Docs" };
@@ -144,7 +153,14 @@ export default {
     const response = await fetch(request);
     const contentType = response.headers.get("content-type") || "";
     if (!contentType.includes("text/html")) return response;
+    const country = request.cf?.country || request.headers.get("CF-IPCountry") || "XX";
+    const syncScript = langSyncScript(country);
     return new HTMLRewriter()
+      .on("head", {
+        element(el) {
+          el.prepend(syncScript, { html: true });
+        },
+      })
       .on("body", {
         element(el) {
           el.append(NAV_FIX_SCRIPT, { html: true });
