@@ -19,6 +19,8 @@ RUN addgroup -S nodejs && adduser -S nextjs -G nodejs
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+# SQLite 数据目录（挂载卷为空时会继承此所有权）
+RUN mkdir -p /app/data && chown -R nextjs:nodejs /app/data
 USER nextjs
 EXPOSE 3000
 CMD ["node", "server.js"]
