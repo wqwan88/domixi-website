@@ -42,7 +42,6 @@ function migrate(db: Database.Database) {
       created_at        TEXT NOT NULL DEFAULT (datetime('now')),
       updated_at        TEXT NOT NULL DEFAULT (datetime('now'))
     );
-
     CREATE UNIQUE INDEX IF NOT EXISTS idx_mpesa_orders_checkout_id
       ON mpesa_orders(checkout_request_id);
 
@@ -56,6 +55,19 @@ function migrate(db: Database.Database) {
       received_at       TEXT NOT NULL DEFAULT (datetime('now'))
     );
   `);
+
+  // 增量迁移：老库补列（重复执行会报错，忽略即可）
+  const addColumn = (ddl: string) => {
+    try {
+      db.exec(ddl);
+    } catch {
+      /* 列已存在 */
+    }
+  };
+  // 充值归属的 New API 用户 ID（从控制台钱包页带入）
+  addColumn("ALTER TABLE mpesa_orders ADD COLUMN user_id INTEGER");
+  // 是否已写入 New API 余额（幂等标记，防止回调/query 双路径重复到账）
+  addColumn("ALTER TABLE mpesa_orders ADD COLUMN credited INTEGER NOT NULL DEFAULT 0");
 }
 
 /* ── CRUD ── */
@@ -73,6 +85,8 @@ export interface MpesaOrderRow {
   mpesa_receipt: string | null;
   transaction_date: string | null;
   raw_callback: string | null;
+  user_id: number | null;
+  credited: number;
   created_at: string;
   updated_at: string;
 }
@@ -83,18 +97,20 @@ export function createOrder(order: {
   phone: string;
   amount: number;
   account_ref: string;
+  user_id?: number | null;
 }): MpesaOrderRow {
   const db = getDb();
   const stmt = db.prepare(`
-    INSERT INTO mpesa_orders (checkout_request_id, merchant_request_id, phone, amount, account_ref)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO mpesa_orders (checkout_request_id, merchant_request_id, phone, amount, account_ref, user_id)
+    VALUES (?, ?, ?, ?, ?, ?)
   `);
   stmt.run(
     order.checkout_request_id,
     order.merchant_request_id,
     order.phone,
     order.amount,
-    order.account_ref
+    order.account_ref,
+    order.user_id ?? null
   );
   return getOrderByCheckoutId(order.checkout_request_id)!;
 }
@@ -146,6 +162,13 @@ export function updateOrderStatus(
     updates.raw_callback,
     checkoutRequestId
   );
+}
+
+export function markOrderCredited(checkoutRequestId: string): void {
+  const db = getDb();
+  db.prepare(
+    "UPDATE mpesa_orders SET credited = 1, updated_at = datetime('now') WHERE checkout_request_id = ?"
+  ).run(checkoutRequestId);
 }
 
 export function saveRawCallback(

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getOrderByCheckoutId, updateOrderStatus, saveRawCallback } from "@/lib/db";
+import { getOrderByCheckoutId, updateOrderStatus, saveRawCallback, markOrderCredited } from "@/lib/db";
 import { extractCallbackMeta } from "@/lib/daraja/client";
+import { creditNewApiUser } from "@/lib/newapi";
 import type { CallbackPayload } from "@/lib/daraja/types";
 
 /**
@@ -56,6 +57,18 @@ export async function POST(req: NextRequest) {
 
     // 更新原始回调记录的 CheckoutRequestID
     saveRawCallback(CheckoutRequestID, rawBody);
+
+    // 5. 支付成功 + 已关联控制台用户 → 自动写入 New API 余额（幂等）
+    if (isSuccess && existing.user_id && !existing.credited) {
+      const receipt = String(meta.MpesaReceiptNumber ?? "") || null;
+      const ok = creditNewApiUser(
+        existing.user_id,
+        existing.amount,
+        existing.account_ref,
+        receipt
+      );
+      if (ok) markOrderCredited(CheckoutRequestID);
+    }
 
     console.log(
       `[MPESA Callback] ${isSuccess ? "✅ 支付成功" : "❌ 支付失败"} ` +

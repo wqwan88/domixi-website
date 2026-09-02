@@ -1,10 +1,40 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 type Status = "idle" | "loading" | "pending" | "success" | "failed";
 
-export default function TopUpPage() {
+function TopUpForm() {
+  const searchParams = useSearchParams();
+  // 优先同源会话自动识别；?uid= 作为回退
+  const uidParam = searchParams.get("uid");
+  const [userId, setUserId] = useState<number | null>(
+    uidParam && /^\d+$/.test(uidParam) ? Number(uidParam) : null
+  );
+  const [identityResolved, setIdentityResolved] = useState(false);
+
+  // 同源请求携带控制台 session cookie → New API /api/user/self 返回当前用户
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/user/self", { credentials: "include" });
+        const json = await res.json();
+        if (!cancelled && json?.success && json?.data?.id) {
+          setUserId(Number(json.data.id));
+        }
+      } catch {
+        // 未登录或不可达，保持未关联状态
+      } finally {
+        if (!cancelled) setIdentityResolved(true);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
   const [status, setStatus] = useState<Status>("idle");
@@ -59,7 +89,7 @@ export default function TopUpPage() {
       const res = await fetch("/api/mpesa/stkpush", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, amount }),
+        body: JSON.stringify({ phone, amount, user_id: userId }),
       });
       const json = await res.json();
 
@@ -96,6 +126,36 @@ export default function TopUpPage() {
       <p style={{ color: "#666", marginBottom: 24 }}>
         通过 M-Pesa STK Push 为您的 DOMIXI 账户充值
       </p>
+
+      {identityResolved && userId ? (
+        <div
+          style={{
+            marginBottom: 20,
+            padding: "10px 14px",
+            borderRadius: 8,
+            backgroundColor: "#ebf5ff",
+            border: "1px solid #bee3f8",
+            fontSize: 14,
+            color: "#2b6cb0",
+          }}
+        >
+          ✓ 已识别控制台账户（用户 #{userId}），支付成功后余额自动到账
+        </div>
+      ) : identityResolved ? (
+        <div
+          style={{
+            marginBottom: 20,
+            padding: "10px 14px",
+            borderRadius: 8,
+            backgroundColor: "#fffaf0",
+            border: "1px solid #feebc8",
+            fontSize: 14,
+            color: "#c05621",
+          }}
+        >
+          未识别到控制台登录态 — 登录控制台后从「钱包」页的 M-Pesa 入口进入可自动到账
+        </div>
+      ) : null}
 
       {status === "idle" || status === "loading" ? (
         <form onSubmit={handleSubmit}>
@@ -233,6 +293,11 @@ export default function TopUpPage() {
           <p style={{ color: "#666", marginBottom: 4 }}>
             订单号: {result?.account_ref}
           </p>
+          {userId ? (
+            <p style={{ color: "#276749", marginBottom: 4, fontSize: 14 }}>
+              余额已写入控制台账户（用户 #{userId}）
+            </p>
+          ) : null}
           <button
             onClick={handleReset}
             style={{
@@ -283,5 +348,13 @@ export default function TopUpPage() {
         </div>
       ) : null}
     </main>
+  );
+}
+
+export default function TopUpPage() {
+  return (
+    <Suspense fallback={null}>
+      <TopUpForm />
+    </Suspense>
   );
 }

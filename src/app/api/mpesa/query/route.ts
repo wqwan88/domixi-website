@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getOrderByCheckoutId, updateOrderStatus, saveRawCallback } from "@/lib/db";
+import { getOrderByCheckoutId, updateOrderStatus, markOrderCredited } from "@/lib/db";
 import { stkQuery } from "@/lib/daraja/client";
+import { creditNewApiUser } from "@/lib/newapi";
 import type { CallbackPayload, STKQueryResponse } from "@/lib/daraja/types";
 
 export async function GET(req: NextRequest) {
@@ -30,6 +31,17 @@ export async function GET(req: NextRequest) {
           transaction_date: null,
           raw_callback: null,
         });
+
+        // 回调没来到时的兜底：query 确认成功后同样入账（订单上的 user_id）
+        if (isSuccess && order.user_id && !order.credited) {
+          const ok = creditNewApiUser(
+            order.user_id,
+            order.amount,
+            order.account_ref,
+            null
+          );
+          if (ok) markOrderCredited(checkoutRequestId);
+        }
       }
     }
 

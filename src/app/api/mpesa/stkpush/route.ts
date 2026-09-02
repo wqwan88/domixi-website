@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stkPush } from "@/lib/daraja/client";
 import { createOrder } from "@/lib/db";
+import { validateNewApiUser } from "@/lib/newapi";
 import crypto from "crypto";
 
 export async function POST(req: NextRequest) {
   try {
-    const { phone, amount } = await req.json();
+    const { phone, amount, user_id } = await req.json();
 
     // 验证参数
     if (!phone || !amount) {
@@ -34,6 +35,25 @@ export async function POST(req: NextRequest) {
     // 生成唯一订单号
     const accountRef = "DMX" + crypto.randomBytes(4).toString("hex").toUpperCase();
 
+    // 校验用户（可选；从控制台钱包页充值时传入，校验不通过拒绝，避免充值丢单）
+    let userId: number | null = null;
+    if (user_id !== undefined && user_id !== null && user_id !== "") {
+      const n = Number(user_id);
+      if (!Number.isInteger(n) || n < 1) {
+        return NextResponse.json(
+          { success: false, error: "user_id 非法" },
+          { status: 400 }
+        );
+      }
+      if (!validateNewApiUser(n)) {
+        return NextResponse.json(
+          { success: false, error: "账户校验失败，请刷新页面后重试" },
+          { status: 400 }
+        );
+      }
+      userId = n;
+    }
+
     // 发起 STK Push
     const result = await stkPush(cleanPhone, amountNum, accountRef);
 
@@ -54,6 +74,7 @@ export async function POST(req: NextRequest) {
       phone: cleanPhone,
       amount: amountNum,
       account_ref: accountRef,
+      user_id: userId,
     });
 
     return NextResponse.json({
