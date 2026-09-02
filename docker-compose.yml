@@ -15,9 +15,13 @@ services:
     environment:
       # New API 控制台地址，浏览器会跳转过去，填公网可访问的域名
       - NEXT_PUBLIC_CONSOLE_URL=https://console.ai-domixi.com
+      # 支付成功后写入控制台钱包余额
+      - NEW_API_DB_PATH=/new-api-data/one-api.db
     volumes:
       # SQLite 订单数据持久化（容器重建不丢）
       - domixi_mpesa_data:/app/data
+      # New API 数据目录（读写到账：先容器内验证，再决定挂载方式）
+      - ../new-api/data:/new-api-data
 
 volumes:
   domixi_mpesa_data:
