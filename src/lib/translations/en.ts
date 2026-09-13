@@ -37,6 +37,7 @@ export default {
     model: "Model",
     input: "Input Price",
     output: "Output Price",
+    currencyUnit: "credits",
     viewAll: "View model list with credit pricing →",
   },
   quickstart: {

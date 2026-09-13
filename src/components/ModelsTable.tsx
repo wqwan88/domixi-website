@@ -3,6 +3,8 @@ import { brand } from "@/lib/brand";
 
 export default function ModelsTable({ lang }: { lang: Lang }) {
   const t = getDict(lang);
+  const unit = t.models.currencyUnit;
+  const tr = (s: string) => s.replaceAll("{unit}", unit);
 
   return (
     <section id="models" className="max-w-6xl mx-auto px-6 py-24">
@@ -27,8 +29,8 @@ export default function ModelsTable({ lang }: { lang: Lang }) {
                 <tr key={m.name}>
                   <td className="text-white/60">{m.vendor}</td>
                   <td className="font-medium">{m.name}</td>
-                  <td className="text-cyan-300">{m.priceIn}</td>
-                  <td className="text-violet-300">{m.priceOut}</td>
+                  <td className="text-cyan-300">{tr(m.priceIn)}</td>
+                  <td className="text-violet-300">{tr(m.priceOut)}</td>
                   <td>
                     <span className="text-xs px-2.5 py-1 rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/25">
                       {m.tag}

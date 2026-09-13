@@ -37,6 +37,7 @@ export default {
     model: "Modèle",
     input: "Prix entrée",
     output: "Prix sortie",
+    currencyUnit: "crédits",
     viewAll: "Voir les 50+ modèles et leurs tarifs en direct →",
   },
   quickstart: {

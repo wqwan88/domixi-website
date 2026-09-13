@@ -37,6 +37,7 @@ export default {
     model: "モデル",
     input: "入力単価",
     output: "出力単価",
+    currencyUnit: "クレジット",
     viewAll: "全50+モデルの最新価格を見る →",
   },
   quickstart: {

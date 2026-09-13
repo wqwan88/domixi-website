@@ -37,6 +37,7 @@ export default {
     model: "模型",
     input: "输入价格",
     output: "输出价格",
+    currencyUnit: "积分",
     viewAll: "查看模型列表与积分价格 →",
   },
   quickstart: {

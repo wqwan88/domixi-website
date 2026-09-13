@@ -37,6 +37,7 @@ export default {
     model: "Mô hình",
     input: "Giá đầu vào",
     output: "Giá đầu ra",
+    currencyUnit: "tín dụng",
     viewAll: "Xem tất cả 50+ mô hình và giá trực tiếp →",
   },
   quickstart: {

@@ -15,10 +15,10 @@ export const brand = {
   // 定价策略：积分制，1 元 = 100 积分
   // 模型与定价同步 hon-maas（燧弘华创）上游供应商
   models: [
-    { vendor: "DeepSeek",  name: "deepseek-v4-flash",          priceIn: "2 积分 / 1M tokens",   priceOut: "8 积分 / 1M tokens",   tag: "高速生成" },
-    { vendor: "DeepSeek",  name: "deepseek-v4-flash-overseas", priceIn: "2 积分 / 1M tokens",   priceOut: "8 积分 / 1M tokens",   tag: "合规出境" },
-    { vendor: "智谱",       name: "glm-5.2",                    priceIn: "0.5 积分 / 1M tokens", priceOut: "0.5 积分 / 1M tokens", tag: "旗舰推理" },
-    { vendor: "Moonshot",  name: "kimi-k3",                    priceIn: "0.5 积分 / 1M tokens", priceOut: "0.5 积分 / 1M tokens", tag: "长文本" },
+    { vendor: "DeepSeek",  name: "deepseek-v4-flash",          priceIn: "2 {unit} / 1M tokens",   priceOut: "8 {unit} / 1M tokens",   tag: "高速生成" },
+    { vendor: "DeepSeek",  name: "deepseek-v4-flash-overseas", priceIn: "2 {unit} / 1M tokens",   priceOut: "8 {unit} / 1M tokens",   tag: "合规出境" },
+    { vendor: "智谱",       name: "glm-5.2",                    priceIn: "0.5 {unit} / 1M tokens", priceOut: "0.5 {unit} / 1M tokens", tag: "旗舰推理" },
+    { vendor: "Moonshot",  name: "kimi-k3",                    priceIn: "0.5 {unit} / 1M tokens", priceOut: "0.5 {unit} / 1M tokens", tag: "长文本" },
   ],
 
   features: [

@@ -37,6 +37,7 @@ export default {
     model: "Модель",
     input: "Цена входа",
     output: "Цена выхода",
+    currencyUnit: "кредиты",
     viewAll: "Все 50+ моделей с актуальными ценами →",
   },
   quickstart: {

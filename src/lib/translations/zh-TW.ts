@@ -37,6 +37,7 @@ export default {
     model: "模型",
     input: "輸入價格",
     output: "輸出價格",
+    currencyUnit: "積分",
     viewAll: "查看模型列表與積分價格 →",
   },
   quickstart: {
