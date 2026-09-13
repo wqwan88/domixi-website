@@ -9,10 +9,10 @@ export default {
     register: "Sign Up Free →",
   },
   hero: {
-    badge: "50+ models online · avg latency < 1.2s",
+    badge: "Selected models online · avg latency < 1.2s",
     title: "One API Key",
-    title2: "Access Every LLM",
-    subtitle: "DOMIXI is a unified LLM API gateway: OpenAI, Claude, Gemini, DeepSeek & 50+ models. OpenAI-compatible interface, pay-as-you-go, transparent usage.",
+    title2: "Access Affordable LLM",
+    subtitle: "DOMIXI is a unified LLM API gateway: DeepSeek, GLM, Kimi and more. OpenAI-compatible interface, credit-based billing, transparent usage.",
     cta: "Get Started — Free Credit",
     cta2: "3-Min Quickstart",
     codeComment: "# Grab a key from the console",
@@ -21,7 +21,7 @@ export default {
     title: "Why",
     subtitle: "A proper relay service: stable, fast, transparent, zero hassle.",
     items: [
-      { icon: "⚡", title: "One Key, All Models", desc: "50+ models: OpenAI / Claude / Gemini / DeepSeek — auto format conversion, no per-vendor integration." },
+      { icon: "⚡", title: "One Key, All Models", desc: "DeepSeek / GLM / Kimi and more — auto format conversion, unified API access." },
       { icon: "📊", title: "Transparent Usage", desc: "Every call logged: tokens, latency, cost. Real-time dashboards, clean monthly billing." },
       { icon: "🛡️", title: "Multi-Channel Failover", desc: "Weighted round-robin + auto retry. Single-channel failures switch seamlessly." },
       { icon: "💳", title: "Pay-As-You-Go", desc: "No monthly fees, no minimums. Alipay, WeChat, Stripe supported." },
@@ -37,7 +37,7 @@ export default {
     model: "Model",
     input: "Input Price",
     output: "Output Price",
-    viewAll: "View all 50+ models with live pricing →",
+    viewAll: "View model list with credit pricing →",
   },
   quickstart: {
     title: "Four Steps to Go",

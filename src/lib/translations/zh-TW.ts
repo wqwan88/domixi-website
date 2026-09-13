@@ -9,10 +9,10 @@ export default {
     register: "免費註冊 →",
   },
   hero: {
-    badge: "50+ 模型在線 · 平均延遲 < 1.2s",
+    badge: "精選模型在線 · 平均延遲 < 1.2s",
     title: "一個金鑰",
     title2: "調用全球大模型",
-    subtitle: "DOMIXI 是統一的大模型 API 閘道：聚合 OpenAI、Claude、Gemini、DeepSeek 等 50+ 模型，OpenAI 相容介面，按量計費，用量全透明。",
+    subtitle: "DOMIXI 是統一的大模型 API 閘道：聚合 DeepSeek、智譜 GLM、Kimi 等國產前沿大模型，OpenAI 相容介面，積分計費，用量全透明。",
     cta: "免費註冊，立得體驗額度",
     cta2: "3 分鐘接入指南",
     codeComment: "# 從控制台取得金鑰",
@@ -21,7 +21,7 @@ export default {
     title: "為什麼選擇",
     subtitle: "中轉站該有的樣子：穩、快、透明、不折騰。",
     items: [
-      { icon: "⚡", title: "一個金鑰，全網模型", desc: "聚合 OpenAI / Claude / Gemini / DeepSeek 等 50+ 模型，格式自動互轉，無需為每家單獨集成。" },
+      { icon: "⚡", title: "一個金鑰，全網模型", desc: "聚合 DeepSeek / GLM / Kimi 等精選國產大模型，統一 API 呼叫，格式自動互轉。" },
       { icon: "📊", title: "用量透明，分毫可查", desc: "每一次調用的 token、耗時、費用全部落盤可查，控制台實時圖表，月底對帳不扯皮。" },
       { icon: "🛡️", title: "多通道容災", desc: "渠道加權輪詢 + 失敗自動重試，單渠道故障無感切換，SLA 不再靠運氣。" },
       { icon: "💳", title: "按量計費，隨充隨用", desc: "無月租、無最低消費，充多少用多少。支持支付寶 / 微信 / Stripe。" },
@@ -37,7 +37,7 @@ export default {
     model: "模型",
     input: "輸入價格",
     output: "輸出價格",
-    viewAll: "查看全部 50+ 模型實時價格 →",
+    viewAll: "查看模型列表與積分價格 →",
   },
   quickstart: {
     title: "四步接入",

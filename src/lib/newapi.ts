@@ -8,18 +8,31 @@
  * 通过 NEW_API_DB_PATH 指定库文件路径（容器内挂载 new-api 数据目录后指向 one-api.db）。
  * 未配置 / 用户未关联时静默跳过，订单仍在 mpesa.db 标记成功。
  *
- * 换算：New API 中 quota_per_unit = 500000，即界面显示 $1 = 500000 quota。
- *   quotaToAdd = amountKes / KES_PER_USD * QUOTA_PER_UNIT
+ * 换算（积分制）：
+ *   quota_per_unit = 500000, custom_currency_exchange_rate = 100
+ *   → 1 元 = 100 积分，1 积分 = 5000 quota
+ *   KES → CNY: amountKes / KES_PER_CNY (≈18)
+ *   CNY → 积分: cny × 100
+ *   积分 → quota: 积分 × 5000
+ *   简化: quotaToAdd = amountKes / KES_PER_CNY × 500000
+ *   top_ups.money 字段存积分值 = quotaToAdd / 5000
  */
 
 import Database from "better-sqlite3";
 import { env, envInt } from "@/lib/env";
 
 const QUOTA_PER_UNIT = () => envInt("NEW_API_QUOTA_PER_UNIT", 500000);
-const KES_PER_USD = () => Number(process.env.KES_PER_USD || "130");
+const EXCHANGE_RATE = () => Number(process.env.CUSTOM_CURRENCY_EXCHANGE_RATE || "100"); // 1 元 = 100 积分
+const KES_PER_CNY = () => Number(process.env.KES_PER_CNY || "18");
 
+/** KES 金额 → New API 底层 quota */
 export function kesToQuota(amountKes: number): number {
-  return Math.max(1, Math.round((amountKes / KES_PER_USD()) * QUOTA_PER_UNIT()));
+  return Math.max(1, Math.round((amountKes / KES_PER_CNY()) * QUOTA_PER_UNIT()));
+}
+
+/** KES 金额 → 显示积分值（用于 top_ups.money / 日志） */
+export function kesToCredits(amountKes: number): number {
+  return Math.max(1, Math.round((amountKes / KES_PER_CNY()) * EXCHANGE_RATE()));
 }
 
 function openNewApi(): Database.Database | null {
@@ -92,7 +105,7 @@ export function creditNewApiUser(
     }
 
     const quotaToAdd = kesToQuota(amountKes);
-    const usdValue = quotaToAdd / QUOTA_PER_UNIT();
+    const credits = kesToCredits(amountKes); // 显示用积分值
     const now = Math.floor(Date.now() / 1000);
     const note = mpesaReceipt ? `${accountRef}/${mpesaReceipt}` : accountRef;
 
@@ -105,12 +118,12 @@ export function creditNewApiUser(
         `INSERT INTO top_ups
            (user_id, amount, money, trade_no, payment_method, payment_provider, create_time, complete_time, status)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
-      ).run(userId, quotaToAdd, usdValue, note, "mpesa", "mpesa", now, now, "success");
+      ).run(userId, quotaToAdd, credits, note, "mpesa", "mpesa", now, now, "success");
     });
     tx();
 
     console.log(
-      `[MPESA Credit] ✅ 用户 ${userId} 入账 ${quotaToAdd} quota（≈$${usdValue.toFixed(4)}，KES ${amountKes}，订单 ${accountRef}）`
+      `[MPESA Credit] ✅ 用户 ${userId} 入账 ${quotaToAdd} quota（≈${credits} 积分，KES ${amountKes}，订单 ${accountRef}）`
     );
     return true;
   } catch (e: any) {
