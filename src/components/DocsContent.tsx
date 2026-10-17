@@ -13,6 +13,8 @@ export default function DocsContent({ lang }: { lang: Lang }) {
     { method: "POST", path: "/v1/messages", desc: t.docs.epClaude },
     { method: "POST", path: "/v1/embeddings", desc: t.docs.epEmbed },
     { method: "POST", path: "/v1/images/generations", desc: t.docs.epImage },
+    { method: "POST", path: "/v1/videos", desc: t.docs.epVideo },
+    { method: "GET", path: "/v1/videos/{task_id}", desc: t.docs.epVideoGet },
     { method: "POST", path: "/v1/rerank", desc: "Rerank API" },
     { method: "GET", path: "/v1/models", desc: t.docs.epModels },
   ];
@@ -57,6 +59,25 @@ export default function DocsContent({ lang }: { lang: Lang }) {
 
         <h2 className="text-xl font-semibold mb-4">{t.docs.curlExample}</h2>
         <pre className="codeblock p-5 overflow-x-auto text-white/85 mb-10">{brand.curlExample}</pre>
+
+        <h2 className="text-xl font-semibold mb-4">{t.docs.videoTitle}</h2>
+        <p className="text-white/50 text-sm mb-4">{t.docs.videoDesc}</p>
+        <div className="glass !transform-none overflow-hidden mb-10">
+          <div className="px-5 py-3.5 border-b border-white/5 text-sm flex flex-wrap gap-2 items-baseline">
+            <span className="text-white/40">{t.docs.videoRatiosLabel}</span>
+            <code className="text-cyan-200">{t.docs.videoRatios}</code>
+          </div>
+          <div className="px-5 py-3.5 text-sm">
+            <div className="text-white/40 mb-2">{t.docs.videoResLabel}</div>
+            {t.docs.videoResolutions.map(([res, lanes]) => (
+              <div key={res} className="flex gap-4 py-1.5 text-sm">
+                <code className="text-cyan-200 min-w-[11rem]">{res}</code>
+                <span className="text-white/50">{lanes}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <p className="text-amber-300/80 text-sm mb-12">{t.docs.videoWarn}</p>
 
         <h2 className="text-xl font-semibold mb-4">{t.docs.errors}</h2>
         <div className="glass !transform-none overflow-hidden mb-14">

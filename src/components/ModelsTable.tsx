@@ -21,6 +21,7 @@ export default function ModelsTable({ lang }: { lang: Lang }) {
                 <th>{t.models.model}</th>
                 <th>{t.models.input}</th>
                 <th>{t.models.output}</th>
+                <th>{t.models.cache}</th>
                 <th></th>
               </tr>
             </thead>
@@ -31,6 +32,7 @@ export default function ModelsTable({ lang }: { lang: Lang }) {
                   <td className="font-medium">{m.name}</td>
                   <td className="text-cyan-300">{tr(m.priceIn)}</td>
                   <td className="text-violet-300">{tr(m.priceOut)}</td>
+                  <td className="text-emerald-300">{tr(m.priceCache)}</td>
                   <td>
                     <span className="text-xs px-2.5 py-1 rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/25">
                       {m.tag}
