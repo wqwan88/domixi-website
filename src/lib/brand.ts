@@ -20,6 +20,7 @@ export const brand = {
     { vendor: "智谱",       name: "glm-5.2",                    priceIn: "0.5 {unit} / 1M tokens", priceOut: "0.5 {unit} / 1M tokens", tag: "旗舰推理" },
     { vendor: "智谱",       name: "glm-5.3",                    priceIn: "0.5 {unit} / 1M tokens", priceOut: "0.5 {unit} / 1M tokens", tag: "新一代旗舰" },
     { vendor: "Moonshot",  name: "kimi-k3",                    priceIn: "0.5 {unit} / 1M tokens", priceOut: "0.5 {unit} / 1M tokens", tag: "长文本" },
+    { vendor: "MiniMax",   name: "minimax-h3",                 priceIn: "5 {unit} / 5 秒视频",   priceOut: "—",                     tag: "视频生成" },
   ],
 
   features: [
