@@ -18,6 +18,7 @@ export const brand = {
     { vendor: "DeepSeek",  name: "deepseek-v4-flash",          priceIn: "2 {unit} / 1M tokens",   priceOut: "8 {unit} / 1M tokens",   tag: "高速生成" },
     { vendor: "DeepSeek",  name: "deepseek-v4-flash-overseas", priceIn: "2 {unit} / 1M tokens",   priceOut: "8 {unit} / 1M tokens",   tag: "合规出境" },
     { vendor: "智谱",       name: "glm-5.2",                    priceIn: "0.5 {unit} / 1M tokens", priceOut: "0.5 {unit} / 1M tokens", tag: "旗舰推理" },
+    { vendor: "智谱",       name: "glm-5.3",                    priceIn: "0.5 {unit} / 1M tokens", priceOut: "0.5 {unit} / 1M tokens", tag: "新一代旗舰" },
     { vendor: "Moonshot",  name: "kimi-k3",                    priceIn: "0.5 {unit} / 1M tokens", priceOut: "0.5 {unit} / 1M tokens", tag: "长文本" },
   ],
 
