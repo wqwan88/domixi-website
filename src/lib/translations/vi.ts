@@ -121,6 +121,41 @@ export default {
     interactive: "Tài liệu API tương tác",
     tryHint: "Thử request bên dưới. Tạo token trong console, rồi Authorize với khóa sk-.",
   },
+  api: {
+    infoDesc:
+      "Cổng LLM tương thích OpenAI. Trỏ base_url của client về `https://token-service.ai-domixi.com/v1` và gọi 50+ mô hình bằng token tạo trong console.\n\nTạo token trong console: https://console.ai-domixi.com/token",
+    serverDesc: "Production",
+    consoleLabel: "Console → Token",
+    tags: {
+      chat: "Hoàn thành hội thoại",
+      claude: "Định dạng gốc Anthropic",
+      embeddings: "Embedding văn bản",
+      images: "Tạo ảnh",
+      models: "Danh sách mô hình",
+    },
+    bearerDesc: "Token sk- tạo trong console",
+    ops: {
+      chat: {
+        summary: "Hoàn thành hội thoại",
+        description: "Tương thích OpenAI Chat Completions. Trả về SSE khi stream=true.",
+      },
+      claude: {
+        summary: "Messages gốc Claude",
+        description: "Tương thích Anthropic Messages API. Phù hợp dự án đã dùng Claude SDK.",
+      },
+      embeddings: { summary: "Vector hóa văn bản" },
+      images: { summary: "Tạo ảnh" },
+      rerank: { summary: "Rerank" },
+      models: { summary: "Liệt kê mô hình khả dụng" },
+    },
+    resp: {
+      ok: "Thành công",
+      unauthorized: "Token không hợp lệ",
+      insufficient: "Số dư không đủ",
+      rateLimited: "Vượt giới hạn tốc độ hoặc quota",
+    },
+    exampleMessage: "Xin chào",
+  },
   legal: {
     updatedPrefix: "Cập nhật lần cuối: ",
   },

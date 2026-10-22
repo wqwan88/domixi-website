@@ -121,6 +121,41 @@ export default {
     interactive: "インタラクティブ API リファレンス",
     tryHint: "下で直接試せます。コンソールでトークンを作成し、Authorize に sk- キーを入力してください。",
   },
+  api: {
+    infoDesc:
+      "OpenAI 互換の LLM ゲートウェイ。クライアントの base_url を `https://token-service.ai-domixi.com/v1` に変更し、コンソールで作成したトークンで 50+ のモデルを呼び出せます。\n\nコンソールでトークンを作成：https://console.ai-domixi.com/token",
+    serverDesc: "本番環境",
+    consoleLabel: "コンソール → トークン",
+    tags: {
+      chat: "チャット補完",
+      claude: "Anthropic ネイティブ形式",
+      embeddings: "テキスト埋め込み",
+      images: "画像生成",
+      models: "モデル一覧",
+    },
+    bearerDesc: "コンソールで作成した sk- トークン",
+    ops: {
+      chat: {
+        summary: "チャット補完",
+        description: "OpenAI Chat Completions 互換。stream=true で SSE を返します。",
+      },
+      claude: {
+        summary: "Claude ネイティブ Messages",
+        description: "Anthropic Messages API 互換。Claude SDK を既に利用しているプロジェクトに最適。",
+      },
+      embeddings: { summary: "テキストのベクトル化" },
+      images: { summary: "画像生成" },
+      rerank: { summary: "Rerank" },
+      models: { summary: "利用可能なモデル一覧" },
+    },
+    resp: {
+      ok: "成功",
+      unauthorized: "トークンが無効",
+      insufficient: "残高不足",
+      rateLimited: "レート制限またはクォータ超過",
+    },
+    exampleMessage: "こんにちは",
+  },
   legal: {
     updatedPrefix: "最終更新日：",
   },

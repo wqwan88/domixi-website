@@ -120,6 +120,41 @@ export default {
     interactive: "交互式 API 参考",
     tryHint: "在下方可以直接试调。先到控制台创建令牌，再点 Authorize 填入 sk- 密钥。",
   },
+  api: {
+    infoDesc:
+      "OpenAI 兼容的大模型网关。把客户端的 base_url 换成 `https://token-service.ai-domixi.com/v1`，使用控制台生成的令牌即可调用 50+ 模型。\n\n在控制台创建令牌：https://console.ai-domixi.com/token",
+    serverDesc: "生产环境",
+    consoleLabel: "控制台 → 令牌",
+    tags: {
+      chat: "对话补全",
+      claude: "Anthropic 原生格式",
+      embeddings: "文本向量",
+      images: "图像生成",
+      models: "模型列表",
+    },
+    bearerDesc: "控制台生成的 sk- 令牌",
+    ops: {
+      chat: {
+        summary: "对话补全",
+        description: "OpenAI Chat Completions 兼容接口。stream=true 时返回 SSE。",
+      },
+      claude: {
+        summary: "Claude 原生 Messages",
+        description: "Anthropic Messages API 兼容。适合已有 Claude SDK 的项目。",
+      },
+      embeddings: { summary: "文本向量化" },
+      images: { summary: "图像生成" },
+      rerank: { summary: "Rerank" },
+      models: { summary: "列出可用模型" },
+    },
+    resp: {
+      ok: "成功",
+      unauthorized: "令牌无效",
+      insufficient: "余额不足",
+      rateLimited: "速率或额度限制",
+    },
+    exampleMessage: "你好",
+  },
   legal: {
     updatedPrefix: "最近更新日期：",
   },

@@ -120,6 +120,41 @@ export default {
     interactive: "Interactive API reference",
     tryHint: "Try requests below. Create a token in the console, then click Authorize and paste your sk- key.",
   },
+  api: {
+    infoDesc:
+      "OpenAI-compatible LLM gateway. Point your client's base_url at `https://token-service.ai-domixi.com/v1` and call 50+ models with a console-issued token.\n\nCreate a token in the console: https://console.ai-domixi.com/token",
+    serverDesc: "Production",
+    consoleLabel: "Console → Tokens",
+    tags: {
+      chat: "Chat completions",
+      claude: "Anthropic native format",
+      embeddings: "Text embeddings",
+      images: "Image generation",
+      models: "Model list",
+    },
+    bearerDesc: "sk- token issued by the console",
+    ops: {
+      chat: {
+        summary: "Chat completions",
+        description: "OpenAI Chat Completions compatible. Returns SSE when stream=true.",
+      },
+      claude: {
+        summary: "Claude native Messages",
+        description: "Anthropic Messages API compatible. Suited to projects already using the Claude SDK.",
+      },
+      embeddings: { summary: "Text embeddings" },
+      images: { summary: "Image generation" },
+      rerank: { summary: "Rerank" },
+      models: { summary: "List available models" },
+    },
+    resp: {
+      ok: "Success",
+      unauthorized: "Invalid token",
+      insufficient: "Insufficient balance",
+      rateLimited: "Rate or quota limit exceeded",
+    },
+    exampleMessage: "Hello",
+  },
   legal: {
     updatedPrefix: "Last updated: ",
   },

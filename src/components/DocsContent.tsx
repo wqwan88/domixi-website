@@ -6,7 +6,7 @@ import ScalarDocs from "@/components/ScalarDocs";
 
 export default function DocsContent({ lang }: { lang: Lang }) {
   const t = getDict(lang);
-  const consoleLabel = lang === "zh" || lang === "zh-TW" ? "控制台 → 令牌" : "Console → Tokens";
+  const consoleLabel = t.api.consoleLabel;
 
   const endpoints = [
     { method: "POST", path: "/v1/chat/completions", desc: t.docs.epChat },
@@ -91,7 +91,7 @@ export default function DocsContent({ lang }: { lang: Lang }) {
 
         <h2 className="text-xl font-semibold mb-2">{t.docs.interactive}</h2>
         <p className="text-white/40 text-sm mb-4">{t.docs.tryHint}</p>
-        <ScalarDocs />
+        <ScalarDocs lang={lang} />
       </div>
       <Footer lang={lang} />
     </main>

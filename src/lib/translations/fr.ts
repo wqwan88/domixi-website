@@ -121,6 +121,41 @@ export default {
     interactive: "Référence API interactive",
     tryHint: "Testez ci-dessous. Créez un jeton dans la console, puis Authorize avec votre clé sk-.",
   },
+  api: {
+    infoDesc:
+      "Passerelle LLM compatible OpenAI. Pointez le base_url de votre client vers `https://token-service.ai-domixi.com/v1` et appelez 50+ modèles avec un jeton créé dans la console.\n\nCréez un jeton dans la console : https://console.ai-domixi.com/token",
+    serverDesc: "Production",
+    consoleLabel: "Console → Jetons",
+    tags: {
+      chat: "Complétions de chat",
+      claude: "Format natif Anthropic",
+      embeddings: "Embeddings texte",
+      images: "Génération d'images",
+      models: "Liste des modèles",
+    },
+    bearerDesc: "Jeton sk- créé dans la console",
+    ops: {
+      chat: {
+        summary: "Complétions de chat",
+        description: "Compatible OpenAI Chat Completions. Renvoie du SSE quand stream=true.",
+      },
+      claude: {
+        summary: "Messages natifs Claude",
+        description: "Compatible Anthropic Messages API. Idéal pour les projets utilisant déjà le SDK Claude.",
+      },
+      embeddings: { summary: "Vectorisation de texte" },
+      images: { summary: "Génération d'images" },
+      rerank: { summary: "Rerank" },
+      models: { summary: "Lister les modèles disponibles" },
+    },
+    resp: {
+      ok: "Succès",
+      unauthorized: "Jeton invalide",
+      insufficient: "Solde insuffisant",
+      rateLimited: "Limite de débit ou quota dépassé",
+    },
+    exampleMessage: "Bonjour",
+  },
   legal: {
     updatedPrefix: "Dernière mise à jour : ",
   },

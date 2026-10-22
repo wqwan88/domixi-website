@@ -121,6 +121,41 @@ export default {
     interactive: "互動式 API 參考",
     tryHint: "可在下方直接試調。先到控制台建立令牌，再點 Authorize 填入 sk- 金鑰。",
   },
+  api: {
+    infoDesc:
+      "OpenAI 相容的大模型閘道。把客戶端的 base_url 換成 `https://token-service.ai-domixi.com/v1`，使用控制台生成的權杖即可調用 50+ 模型。\n\n在控制台建立權杖：https://console.ai-domixi.com/token",
+    serverDesc: "生產環境",
+    consoleLabel: "控制台 → 權杖",
+    tags: {
+      chat: "對話補全",
+      claude: "Anthropic 原生格式",
+      embeddings: "文字向量",
+      images: "圖像生成",
+      models: "模型列表",
+    },
+    bearerDesc: "控制台生成的 sk- 權杖",
+    ops: {
+      chat: {
+        summary: "對話補全",
+        description: "OpenAI Chat Completions 相容介面。stream=true 時回傳 SSE。",
+      },
+      claude: {
+        summary: "Claude 原生 Messages",
+        description: "Anthropic Messages API 相容。適合已有 Claude SDK 的專案。",
+      },
+      embeddings: { summary: "文字向量化" },
+      images: { summary: "圖像生成" },
+      rerank: { summary: "Rerank" },
+      models: { summary: "列出可用模型" },
+    },
+    resp: {
+      ok: "成功",
+      unauthorized: "權杖無效",
+      insufficient: "餘額不足",
+      rateLimited: "速率或額度限制",
+    },
+    exampleMessage: "你好",
+  },
   legal: {
     updatedPrefix: "最近更新日期：",
   },

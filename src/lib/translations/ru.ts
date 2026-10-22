@@ -121,6 +121,41 @@ export default {
     interactive: "Интерактивный справочник API",
     tryHint: "Пробуйте запросы ниже. Создайте токен в консоли и вставьте sk- ключ в Authorize.",
   },
+  api: {
+    infoDesc:
+      "LLM-шлюз, совместимый с OpenAI. Укажите base_url клиента на `https://token-service.ai-domixi.com/v1` и вызывайте 50+ моделей с токеном из консоли.\n\nСоздать токен в консоли: https://console.ai-domixi.com/token",
+    serverDesc: "Продакшн",
+    consoleLabel: "Консоль → Токены",
+    tags: {
+      chat: "Чат-дополнения",
+      claude: "Нативный формат Anthropic",
+      embeddings: "Текстовые эмбеддинги",
+      images: "Генерация изображений",
+      models: "Список моделей",
+    },
+    bearerDesc: "Токен sk-, созданный в консоли",
+    ops: {
+      chat: {
+        summary: "Чат-дополнения",
+        description: "Совместимо с OpenAI Chat Completions. Возвращает SSE при stream=true.",
+      },
+      claude: {
+        summary: "Нативные сообщения Claude",
+        description: "Совместимо с Anthropic Messages API. Подходит проектам, уже использующим Claude SDK.",
+      },
+      embeddings: { summary: "Векторизация текста" },
+      images: { summary: "Генерация изображений" },
+      rerank: { summary: "Rerank" },
+      models: { summary: "Список доступных моделей" },
+    },
+    resp: {
+      ok: "Успех",
+      unauthorized: "Недействительный токен",
+      insufficient: "Недостаточно средств",
+      rateLimited: "Превышен лимит запросов или квота",
+    },
+    exampleMessage: "Привет",
+  },
   legal: {
     updatedPrefix: "Последнее обновление: ",
   },

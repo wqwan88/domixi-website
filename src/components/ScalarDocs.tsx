@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-export default function ScalarDocs() {
+export default function ScalarDocs({ lang }: { lang: string }) {
   const host = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export default function ScalarDocs() {
     const script = document.createElement("script");
     script.id = "api-reference";
     script.src = "https://cdn.jsdelivr.net/npm/@scalar/api-reference";
-    script.setAttribute("data-url", "/openapi.json");
+    script.setAttribute("data-url", `/openapi.json?lang=${encodeURIComponent(lang)}`);
     script.setAttribute(
       "data-configuration",
       JSON.stringify({
@@ -26,7 +26,7 @@ export default function ScalarDocs() {
     return () => {
       el.innerHTML = "";
     };
-  }, []);
+  }, [lang]);
 
   return (
     <div
