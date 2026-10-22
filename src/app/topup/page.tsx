@@ -61,7 +61,7 @@ function TopUpForm() {
             pollRef.current = null;
           } else if (json.data.status === "failed") {
             setStatus("failed");
-            setError(json.data.result_desc || "支付失败");
+            setError(json.data.result_desc || "Payment failed");
             clearInterval(pollRef.current!);
             pollRef.current = null;
           }
@@ -95,7 +95,7 @@ function TopUpForm() {
 
       if (!json.success) {
         setStatus("idle");
-        setError(json.error || "发起支付失败");
+        setError(json.error || "Failed to initiate payment");
         return;
       }
 
@@ -104,7 +104,7 @@ function TopUpForm() {
       startPolling(json.data.checkout_request_id);
     } catch (err: any) {
       setStatus("idle");
-      setError(err.message || "网络错误");
+      setError(err.message || "Network error");
     }
   };
 
@@ -122,9 +122,9 @@ function TopUpForm() {
 
   return (
     <main style={{ maxWidth: 480, margin: "80px auto", padding: "0 16px" }}>
-      <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>M-Pesa 充值</h1>
+      <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>M-Pesa Top Up</h1>
       <p style={{ color: "#666", marginBottom: 24 }}>
-        通过 M-Pesa STK Push 为您的 DOMIXI 账户充值
+        Top up your DOMIXI account via M-Pesa STK Push
       </p>
 
       {identityResolved && userId ? (
@@ -139,7 +139,7 @@ function TopUpForm() {
             color: "#2b6cb0",
           }}
         >
-          ✓ 已识别控制台账户（用户 #{userId}），支付成功后余额自动到账
+          ✓ Console account detected (user #{userId}), balance will be credited automatically after payment
         </div>
       ) : identityResolved ? (
         <div
@@ -153,7 +153,7 @@ function TopUpForm() {
             color: "#c05621",
           }}
         >
-          未识别到控制台登录态 — 登录控制台后从「钱包」页的 M-Pesa 入口进入可自动到账
+          No console session detected — sign in to the console and use the M-Pesa entry on the Wallet page for automatic crediting
         </div>
       ) : null}
 
@@ -164,7 +164,7 @@ function TopUpForm() {
               htmlFor="phone"
               style={{ display: "block", marginBottom: 4, fontWeight: 500 }}
             >
-              M-Pesa 手机号
+              M-Pesa phone number
             </label>
             <input
               id="phone"
@@ -184,7 +184,7 @@ function TopUpForm() {
               }}
             />
             <small style={{ color: "#999" }}>
-              肯尼亚 Safaricom 号码，格式 2547XXXXXXXX
+              Kenyan Safaricom number, format 2547XXXXXXXX
             </small>
           </div>
 
@@ -193,14 +193,14 @@ function TopUpForm() {
               htmlFor="amount"
               style={{ display: "block", marginBottom: 4, fontWeight: 500 }}
             >
-              金额 (KES)
+              Amount (KES)
             </label>
             <input
               id="amount"
               type="number"
               min={1}
               max={150000}
-              placeholder="例如 100"
+              placeholder="e.g. 100"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               required
@@ -235,7 +235,7 @@ function TopUpForm() {
               cursor: status === "loading" ? "not-allowed" : "pointer",
             }}
           >
-            {status === "loading" ? "正在发起..." : `通过 M-Pesa 支付 KES ${amount || "0"}`}
+            {status === "loading" ? "Initiating…" : `Pay KES ${amount || "0"} via M-Pesa`}
           </button>
         </form>
       ) : null}
@@ -250,12 +250,12 @@ function TopUpForm() {
           }}
         >
           <div style={{ fontSize: 48, marginBottom: 16 }}>⏳</div>
-          <h2 style={{ fontSize: 18, marginBottom: 8 }}>等待支付确认</h2>
+          <h2 style={{ fontSize: 18, marginBottom: 8 }}>Awaiting payment confirmation</h2>
           <p style={{ color: "#666", marginBottom: 8 }}>
-            请在手机上输入 M-Pesa PIN 完成支付
+            Enter your M-Pesa PIN on your phone to complete the payment
           </p>
           <p style={{ fontSize: 12, color: "#999" }}>
-            订单号: {result.account_ref}
+            Order ref: {result.account_ref}
           </p>
           <p style={{ fontSize: 12, color: "#999" }}>
             CheckoutRequestID: {result.checkout_request_id}
@@ -288,14 +288,14 @@ function TopUpForm() {
         >
           <div style={{ fontSize: 48, marginBottom: 16 }}>✅</div>
           <h2 style={{ fontSize: 18, marginBottom: 8, color: "#276749" }}>
-            支付成功！
+            Payment successful!
           </h2>
           <p style={{ color: "#666", marginBottom: 4 }}>
-            订单号: {result?.account_ref}
+            Order ref: {result?.account_ref}
           </p>
           {userId ? (
             <p style={{ color: "#276749", marginBottom: 4, fontSize: 14 }}>
-              余额已写入控制台账户（用户 #{userId}）
+              Balance credited to your console account (user #{userId})
             </p>
           ) : null}
           <button
@@ -311,7 +311,7 @@ function TopUpForm() {
               cursor: "pointer",
             }}
           >
-            继续充值
+            Top up again
           </button>
         </div>
       ) : null}
@@ -328,7 +328,7 @@ function TopUpForm() {
         >
           <div style={{ fontSize: 48, marginBottom: 16 }}>❌</div>
           <h2 style={{ fontSize: 18, marginBottom: 8, color: "#c53030" }}>
-            支付失败
+            Payment failed
           </h2>
           <p style={{ color: "#666", marginBottom: 16 }}>{error}</p>
           <button
@@ -343,7 +343,7 @@ function TopUpForm() {
               cursor: "pointer",
             }}
           >
-            重新充值
+            Retry payment
           </button>
         </div>
       ) : null}

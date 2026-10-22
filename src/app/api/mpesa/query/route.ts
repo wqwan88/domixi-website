@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
 
   if (!checkoutRequestId) {
     return NextResponse.json(
-      { success: false, error: "缺少 checkout_request_id" },
+      { success: false, error: "Missing checkout_request_id" },
       { status: 400 }
     );
   }
@@ -56,7 +56,7 @@ export async function GET(req: NextRequest) {
   } catch (err: any) {
     console.error("[MPESA Query]", err);
     return NextResponse.json(
-      { success: false, error: err.message || "查询失败" },
+      { success: false, error: err.message || "Query failed" },
       { status: 500 }
     );
   }

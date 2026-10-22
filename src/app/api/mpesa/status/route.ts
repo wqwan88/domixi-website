@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
 
   if (!checkoutRequestId) {
     return NextResponse.json(
-      { success: false, error: "缺少 checkout_request_id 参数" },
+      { success: false, error: "Missing checkout_request_id parameter" },
       { status: 400 }
     );
   }
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
 
   if (!order) {
     return NextResponse.json(
-      { success: false, error: "订单不存在" },
+      { success: false, error: "Order not found" },
       { status: 404 }
     );
   }

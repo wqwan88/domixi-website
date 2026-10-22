@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     // 验证参数
     if (!phone || !amount) {
       return NextResponse.json(
-        { success: false, error: "缺少手机号或金额" },
+        { success: false, error: "Missing phone number or amount" },
         { status: 400 }
       );
     }
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     const cleanPhone = phone.replace(/\D/g, "");
     if (!cleanPhone.startsWith("254") || cleanPhone.length !== 12) {
       return NextResponse.json(
-        { success: false, error: "手机号格式错误，需要 2547XXXXXXXX" },
+        { success: false, error: "Invalid phone format, expected 2547XXXXXXXX" },
         { status: 400 }
       );
     }
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     const amountNum = Number(amount);
     if (!Number.isFinite(amountNum) || amountNum < 1 || amountNum > 150000) {
       return NextResponse.json(
-        { success: false, error: "金额范围 1-150000 KES" },
+        { success: false, error: "Amount must be between 1 and 150000 KES" },
         { status: 400 }
       );
     }
@@ -41,13 +41,13 @@ export async function POST(req: NextRequest) {
       const n = Number(user_id);
       if (!Number.isInteger(n) || n < 1) {
         return NextResponse.json(
-          { success: false, error: "user_id 非法" },
+          { success: false, error: "Invalid user_id" },
           { status: 400 }
         );
       }
       if (!validateNewApiUser(n)) {
         return NextResponse.json(
-          { success: false, error: "账户校验失败，请刷新页面后重试" },
+          { success: false, error: "Account verification failed, please refresh and try again" },
           { status: 400 }
         );
       }
@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
   } catch (err: any) {
     console.error("[MPESA STK Push]", err);
     return NextResponse.json(
-      { success: false, error: err.message || "服务器内部错误" },
+      { success: false, error: err.message || "Internal server error" },
       { status: 500 }
     );
   }
