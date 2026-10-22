@@ -75,6 +75,7 @@ export default {
   },
   footer: {
     product: "Продукт",
+    tagline: "Один ключ ко всем ведущим LLM",
     support: "Поддержка",
     legal: "Правовая информация",
     models: "Цены",

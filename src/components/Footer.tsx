@@ -12,7 +12,7 @@ export default function Footer({ lang }: { lang: Lang }) {
             <img src="/domixi.svg" alt="" className="w-6 h-6" />
             <span className="font-bold">DOMIXI</span>
           </div>
-          <p className="text-slate-500 leading-relaxed">{brand.tagline}</p>
+          <p className="text-slate-500 leading-relaxed">{t.footer.tagline}</p>
         </div>
         <div>
           <h4 className="text-slate-600 font-medium mb-3">{t.footer.product}</h4>

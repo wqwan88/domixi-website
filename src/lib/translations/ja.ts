@@ -75,6 +75,7 @@ export default {
   },
   footer: {
     product: "プロダクト",
+    tagline: "1つのキーで世界の主要LLMを",
     support: "サポート",
     legal: "法務",
     models: "料金",

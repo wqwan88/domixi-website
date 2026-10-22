@@ -75,6 +75,7 @@ export default {
   },
   footer: {
     product: "Sản phẩm",
+    tagline: "Một khóa cho mọi LLM hàng đầu",
     support: "Hỗ trợ",
     legal: "Pháp lý",
     models: "Bảng giá",

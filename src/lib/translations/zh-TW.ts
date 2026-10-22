@@ -75,6 +75,7 @@ export default {
   },
   footer: {
     product: "產品",
+    tagline: "一個密鑰，調用全球大模型",
     support: "支持",
     legal: "協議",
     models: "模型定價",

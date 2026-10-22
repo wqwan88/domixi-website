@@ -75,6 +75,7 @@ export default {
   },
   footer: {
     product: "Produit",
+    tagline: "Une clé pour tous les grands LLM",
     support: "Support",
     legal: "Mentions légales",
     models: "Tarifs",
