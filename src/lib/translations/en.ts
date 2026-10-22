@@ -40,6 +40,9 @@ export default {
     cache: "Cache Hit",
     currencyUnit: "Credit",
     viewAll: "View model list with pricing →",
+    per: "sec",
+    vendors: { zhipu: "Zhipu AI", moonshot: "Moonshot", deepseek: "DeepSeek", minimax: "MiniMax" },
+    tags: { flagship: "Flagship reasoning", flagshipNext: "Next-gen flagship", longContext: "Long context", fast: "High-speed", video: "Video generation" },
   },
   quickstart: {
     title: "Four Steps to Go",

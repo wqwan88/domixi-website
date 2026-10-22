@@ -40,6 +40,9 @@ export default {
     cache: "キャッシュ",
     currencyUnit: "Credit",
     viewAll: "モデル一覧と最新価格を見る →",
+    per: "秒",
+    vendors: { zhipu: "Zhipu AI", moonshot: "Moonshot", deepseek: "DeepSeek", minimax: "MiniMax" },
+    tags: { flagship: "フラッグシップ推論", flagshipNext: "次世代フラッグシップ", longContext: "長文コンテキスト", fast: "高速生成", video: "動画生成" },
   },
   quickstart: {
     title: "4ステップ",

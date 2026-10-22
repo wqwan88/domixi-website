@@ -40,6 +40,9 @@ export default {
     cache: "Кэш",
     currencyUnit: "Credit",
     viewAll: "Все модели с актуальными ценами →",
+    per: "сек",
+    vendors: { zhipu: "Zhipu AI", moonshot: "Moonshot", deepseek: "DeepSeek", minimax: "MiniMax" },
+    tags: { flagship: "Флагманское рассуждение", flagshipNext: "Флагман нового поколения", longContext: "Длинный контекст", fast: "Высокоскоростной", video: "Генерация видео" },
   },
   quickstart: {
     title: "Четыре шага",

@@ -4,7 +4,10 @@ import { brand } from "@/lib/brand";
 export default function ModelsTable({ lang }: { lang: Lang }) {
   const t = getDict(lang);
   const unit = t.models.currencyUnit;
-  const tr = (s: string) => s.replaceAll("{unit}", unit);
+  const vendors = t.models.vendors as Record<string, string>;
+  const tags = t.models.tags as Record<string, string>;
+  const tr = (s: string) =>
+    s.replaceAll("{unit}", unit).replaceAll("{per}", t.models.per);
 
   return (
     <section id="models" className="max-w-6xl mx-auto px-6 py-24">
@@ -28,14 +31,14 @@ export default function ModelsTable({ lang }: { lang: Lang }) {
             <tbody>
               {brand.models.map((m) => (
                 <tr key={m.name}>
-                  <td className="text-slate-600">{m.vendor}</td>
+                  <td className="text-slate-600">{vendors[m.vendor] ?? m.vendor}</td>
                   <td className="font-medium">{m.name}</td>
                   <td className="text-cyan-700">{tr(m.priceIn)}</td>
                   <td className="text-violet-600">{tr(m.priceOut)}</td>
                   <td className="text-emerald-700">{tr(m.priceCache)}</td>
                   <td>
                     <span className="text-xs px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-600 border border-blue-500/25">
-                      {m.tag}
+                      {tags[m.tag] ?? m.tag}
                     </span>
                   </td>
                 </tr>

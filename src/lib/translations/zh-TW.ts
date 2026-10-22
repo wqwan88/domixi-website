@@ -40,6 +40,9 @@ export default {
     cache: "緩存命中",
     currencyUnit: "Credit",
     viewAll: "查看模型列表與價格 →",
+    per: "秒",
+    vendors: { zhipu: "智譜", moonshot: "Moonshot", deepseek: "DeepSeek", minimax: "MiniMax" },
+    tags: { flagship: "旗艦推理", flagshipNext: "新一代旗艦", longContext: "長文本", fast: "高速生成", video: "影片生成" },
   },
   quickstart: {
     title: "四步接入",

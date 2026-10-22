@@ -40,6 +40,9 @@ export default {
     cache: "Cache",
     currencyUnit: "Credit",
     viewAll: "Voir les modèles et leurs tarifs →",
+    per: "s",
+    vendors: { zhipu: "Zhipu AI", moonshot: "Moonshot", deepseek: "DeepSeek", minimax: "MiniMax" },
+    tags: { flagship: "Raisonnement phare", flagshipNext: "Nouvelle génération", longContext: "Contexte long", fast: "Haute vitesse", video: "Génération vidéo" },
   },
   quickstart: {
     title: "Quatre étapes",

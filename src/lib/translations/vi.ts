@@ -40,6 +40,9 @@ export default {
     cache: "Cache",
     currencyUnit: "Credit",
     viewAll: "Xem mô hình và giá trực tiếp →",
+    per: "giây",
+    vendors: { zhipu: "Zhipu AI", moonshot: "Moonshot", deepseek: "DeepSeek", minimax: "MiniMax" },
+    tags: { flagship: "Suy luận hàng đầu", flagshipNext: "Thế hệ mới", longContext: "Ngữ cảnh dài", fast: "Tốc độ cao", video: "Tạo video" },
   },
   quickstart: {
     title: "Bốn bước đơn giản",

@@ -14,12 +14,14 @@ export const brand = {
 
   // 定价策略：Credit 制，1 Credit = 1 元
   // 模型与定价同步 hon-maas（燧弘华创）上游供应商官方价格
+  // vendor/tag 为字典 key（见 translations/*.ts 的 modelVendors / modelTags）
+  // priceIn 里的 {unit} / {per} 占位符由组件按语言替换
   models: [
-    { vendor: "智谱",       name: "glm-5.2",           priceIn: "8 {unit} / 1M tokens",  priceOut: "28 {unit} / 1M tokens",  priceCache: "2 {unit} / 1M tokens",    tag: "旗舰推理" },
-    { vendor: "智谱",       name: "glm-5.3",           priceIn: "8 {unit} / 1M tokens",  priceOut: "28 {unit} / 1M tokens",  priceCache: "2 {unit} / 1M tokens",    tag: "新一代旗舰" },
-    { vendor: "Moonshot",  name: "kimi-k3",          priceIn: "20 {unit} / 1M tokens", priceOut: "100 {unit} / 1M tokens", priceCache: "2 {unit} / 1M tokens",    tag: "长文本" },
-    { vendor: "DeepSeek",  name: "deepseek-v4.1-flash", priceIn: "1 {unit} / 1M tokens", priceOut: "4 {unit} / 1M tokens",   priceCache: "0.02 {unit} / 1M tokens", tag: "高速生成" },
-    { vendor: "MiniMax",   name: "minimax-h3",       priceIn: "0.5 {unit} / 秒",       priceOut: "—",                     priceCache: "—",                        tag: "视频生成" },
+    { vendor: "zhipu",    name: "glm-5.2",           priceIn: "8 {unit} / 1M tokens",  priceOut: "28 {unit} / 1M tokens",  priceCache: "2 {unit} / 1M tokens",    tag: "flagship" },
+    { vendor: "zhipu",    name: "glm-5.3",           priceIn: "8 {unit} / 1M tokens",  priceOut: "28 {unit} / 1M tokens",  priceCache: "2 {unit} / 1M tokens",    tag: "flagshipNext" },
+    { vendor: "moonshot", name: "kimi-k3",          priceIn: "20 {unit} / 1M tokens", priceOut: "100 {unit} / 1M tokens", priceCache: "2 {unit} / 1M tokens",    tag: "longContext" },
+    { vendor: "deepseek", name: "deepseek-v4.1-flash", priceIn: "1 {unit} / 1M tokens", priceOut: "4 {unit} / 1M tokens",   priceCache: "0.02 {unit} / 1M tokens", tag: "fast" },
+    { vendor: "minimax",  name: "minimax-h3",       priceIn: "0.5 {unit} / {per}",    priceOut: "—",                     priceCache: "—",                        tag: "video" },
   ],
 
   features: [
