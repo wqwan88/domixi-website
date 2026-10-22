@@ -17,7 +17,7 @@ export default function ScalarDocs({ lang }: { lang: string }) {
       "data-configuration",
       JSON.stringify({
         theme: "kepler",
-        darkMode: true,
+        darkMode: false,
         hideDarkModeToggle: true,
         defaultOpenAllTags: true,
       }),
@@ -31,7 +31,7 @@ export default function ScalarDocs({ lang }: { lang: string }) {
   return (
     <div
       ref={host}
-      className="mt-4 rounded-2xl overflow-hidden border border-white/10 bg-[#0b1120] min-h-[70vh]"
+      className="mt-4 rounded-2xl overflow-hidden border border-slate-900/10 bg-white min-h-[70vh]"
     />
   );
 }

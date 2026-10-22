@@ -10,7 +10,7 @@ export default function Cta({ lang }: { lang: Lang }) {
         <h2 className="text-3xl md:text-4xl font-bold">
           {t.cta.title} <span className="prism-text">DOMIXI</span>
         </h2>
-        <p className="text-white/50 mt-4 mb-10">{t.cta.subtitle}</p>
+        <p className="text-slate-500 mt-4 mb-10">{t.cta.subtitle}</p>
         <a href={consoleHref(lang, "/register")} className="btn-primary px-10 py-4 text-lg inline-block">
           {t.cta.button}
         </a>

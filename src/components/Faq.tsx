@@ -14,13 +14,13 @@ export default function Faq({ lang }: { lang: Lang }) {
           <div key={i} className="glass !transform-none overflow-hidden">
             <button
               onClick={() => setOpen(open === i ? null : i)}
-              className="w-full flex items-center justify-between px-6 py-4 text-left font-medium hover:text-blue-200 transition-colors"
+              className="w-full flex items-center justify-between px-6 py-4 text-left font-medium hover:text-blue-700 transition-colors"
             >
               {item.q}
-              <span className={`text-white/40 transition-transform duration-300 ${open === i ? "rotate-45" : ""}`}>＋</span>
+              <span className={`text-slate-400 transition-transform duration-300 ${open === i ? "rotate-45" : ""}`}>＋</span>
             </button>
             <div
-              className={`px-6 text-sm text-white/55 leading-relaxed transition-all duration-300 ${
+              className={`px-6 text-sm text-slate-600 leading-relaxed transition-all duration-300 ${
                 open === i ? "max-h-48 pb-5 opacity-100" : "max-h-0 opacity-0"
               } overflow-hidden`}
             >

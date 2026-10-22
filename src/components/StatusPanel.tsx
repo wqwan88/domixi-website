@@ -69,7 +69,7 @@ export default function StatusPanel({
   }, []);
 
   if (!health) {
-    return <p className="text-white/40">{labels.checking}</p>;
+    return <p className="text-slate-500">{labels.checking}</p>;
   }
 
   const ok = health.ok;
@@ -85,7 +85,7 @@ export default function StatusPanel({
     <div>
       <div
         className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm mb-8 ${
-          ok ? "bg-emerald-500/15 text-emerald-300" : "bg-red-500/15 text-red-300"
+          ok ? "bg-emerald-500/10 text-emerald-700" : "bg-red-500/10 text-red-700"
         }`}
       >
         <span className={`w-2 h-2 rounded-full ${ok ? "bg-emerald-400" : "bg-red-400"}`} />
@@ -94,19 +94,19 @@ export default function StatusPanel({
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {cards.map((c) => (
           <div key={c.k} className="glass !transform-none p-5">
-            <div className="text-xs text-white/40 mb-1">{c.k}</div>
+            <div className="text-xs text-slate-500 mb-1">{c.k}</div>
             <div className="text-lg font-semibold">{c.v}</div>
           </div>
         ))}
       </div>
       {health.server_address && (
-        <p className="text-sm text-white/40 mt-8">
+        <p className="text-sm text-slate-500 mt-8">
           {labels.endpoint}{" "}
-          <code className="text-cyan-300">{health.server_address}</code>
+          <code className="text-cyan-700">{health.server_address}</code>
         </p>
       )}
       {health.checked_at && (
-        <p className="text-xs text-white/30 mt-2">
+        <p className="text-xs text-slate-500 mt-2">
           {labels.lastChecked} {new Date(health.checked_at).toLocaleString()}
         </p>
       )}

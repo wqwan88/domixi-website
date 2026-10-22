@@ -11,7 +11,7 @@ export default function Hero({ lang }: { lang: Lang }) {
       <div className="light-beam w-[50vw] top-[55%] left-[30%] rotate-3 opacity-40" />
 
       <div className="max-w-4xl mx-auto text-center pt-24 pb-16">
-        <div className="inline-flex items-center gap-2 glass px-4 py-1.5 text-xs text-white/60 mb-8">
+        <div className="inline-flex items-center gap-2 glass px-4 py-1.5 text-xs text-slate-600 mb-8">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           {t.hero.badge}
         </div>
@@ -22,7 +22,7 @@ export default function Hero({ lang }: { lang: Lang }) {
           <span className="prism-text">{t.hero.title2}</span>
         </h1>
 
-        <p className="mt-8 text-lg md:text-xl text-white/55 max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-8 text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
           {t.hero.subtitle}
         </p>
 
@@ -35,7 +35,7 @@ export default function Hero({ lang }: { lang: Lang }) {
           </a>
           <a
             href={langPath(lang, "/#quickstart")}
-            className="glass px-8 py-3.5 text-base text-white/80 hover:text-white w-full sm:w-auto text-center"
+            className="glass px-8 py-3.5 text-base text-slate-700 hover:text-slate-900 w-full sm:w-auto text-center"
           >
             {t.hero.cta2}
           </a>
@@ -48,7 +48,7 @@ export default function Hero({ lang }: { lang: Lang }) {
             <span className="w-3 h-3 rounded-full bg-green-500/70" />
           </div>
           <pre className="text-white/85 whitespace-pre text-sm">
-            <span className="text-white/40">{t.hero.codeComment}</span>
+            <span className="text-slate-400">{t.hero.codeComment}</span>
             {"\n"}
             {curlExample(lang).split('\n').slice(0, 3).join('\n')}
           </pre>

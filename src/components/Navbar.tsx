@@ -20,7 +20,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? "backdrop-blur-xl bg-black/50 border-b border-white/10" : ""
+        scrolled ? "backdrop-blur-xl bg-blue-500/50 border-b border-slate-900/10" : ""
       }`}
     >
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 h-16">
@@ -29,20 +29,20 @@ export default function Navbar({ lang }: { lang: Lang }) {
           <span className="font-bold text-lg tracking-tight">DOMIXI</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8 text-sm text-white/70">
-          <Link href={langPath(lang)} className="hover:text-white transition-colors">
+        <div className="hidden md:flex items-center gap-8 text-sm text-slate-600">
+          <Link href={langPath(lang)} className="hover:text-slate-900 transition-colors">
             {t.nav.home}
           </Link>
-          <Link href={langPath(lang, "/#models")} className="hover:text-white transition-colors">
+          <Link href={langPath(lang, "/#models")} className="hover:text-slate-900 transition-colors">
             {t.nav.plaza}
           </Link>
-          <Link href={langPath(lang, "/docs")} className="hover:text-white transition-colors">
+          <Link href={langPath(lang, "/docs")} className="hover:text-slate-900 transition-colors">
             {t.nav.docs}
           </Link>
-          <Link href={langPath(lang, "/#faq")} className="hover:text-white transition-colors">
+          <Link href={langPath(lang, "/#faq")} className="hover:text-slate-900 transition-colors">
             {t.nav.faq}
           </Link>
-          <a href={consoleHref(lang, "/console")} className="hover:text-white transition-colors">
+          <a href={consoleHref(lang, "/console")} className="hover:text-slate-900 transition-colors">
             {t.nav.console}
           </a>
         </div>
@@ -53,7 +53,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
             <button
               onClick={() => setLangOpen(!langOpen)}
               onBlur={() => setTimeout(() => setLangOpen(false), 200)}
-              className="text-sm text-white/70 hover:text-white transition-colors px-2 py-1.5 flex items-center gap-1"
+              className="text-sm text-slate-600 hover:text-slate-900 transition-colors px-2 py-1.5 flex items-center gap-1"
             >
               {current?.flag} {current?.label}
             </button>
@@ -63,8 +63,8 @@ export default function Navbar({ lang }: { lang: Lang }) {
                   <Link
                     key={l.code}
                     href={langSwitchUrl(pathname, l.code)}
-                    className={`block px-4 py-2.5 text-sm hover:bg-white/10 transition-colors ${
-                      l.code === lang ? "text-cyan-300" : "text-white/70"
+                    className={`block px-4 py-2.5 text-sm hover:bg-slate-900/5 transition-colors ${
+                      l.code === lang ? "text-cyan-700" : "text-slate-600"
                     }`}
                   >
                     {l.flag} {l.label}
@@ -76,7 +76,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
 
           <a
             href={consoleHref(lang, "/login")}
-            className="text-sm text-white/80 hover:text-white transition-colors px-3 py-2"
+            className="text-sm text-slate-700 hover:text-slate-900 transition-colors px-3 py-2"
           >
             {t.nav.login}
           </a>
