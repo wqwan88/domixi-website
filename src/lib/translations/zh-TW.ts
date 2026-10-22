@@ -156,6 +156,11 @@ export default {
     },
     exampleMessage: "你好",
   },
+  code: {
+    pyApiKeyComment: "# 控制台生成的權杖",
+    pyModelComment: "# 想換模型？改這一行就夠",
+    userMessage: "你好",
+  },
   legal: {
     updatedPrefix: "最近更新日期：",
   },

@@ -156,6 +156,11 @@ export default {
     },
     exampleMessage: "Bonjour",
   },
+  code: {
+    pyApiKeyComment: "# jeton créé dans la console",
+    pyModelComment: "# envie d'un autre modèle ? changez cette ligne",
+    userMessage: "Bonjour",
+  },
   legal: {
     updatedPrefix: "Dernière mise à jour : ",
   },

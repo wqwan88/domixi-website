@@ -1,5 +1,5 @@
 import { type Lang, getDict } from "@/lib/i18n";
-import { brand } from "@/lib/brand";
+import { pythonExample } from "@/lib/code-examples";
 
 export default function QuickStart({ lang }: { lang: Lang }) {
   const t = getDict(lang);
@@ -24,7 +24,7 @@ export default function QuickStart({ lang }: { lang: Lang }) {
           <span className="text-xs text-white/40">{t.quickstart.codeTitle}</span>
           <span className="text-xs text-white/40">{t.quickstart.codeTag}</span>
         </div>
-        <pre className="codeblock !border-0 !rounded-none p-5 overflow-x-auto text-white/85 text-sm">{brand.codeExample}</pre>
+        <pre className="codeblock !border-0 !rounded-none p-5 overflow-x-auto text-white/85 text-sm">{pythonExample(lang)}</pre>
       </div>
     </section>
   );

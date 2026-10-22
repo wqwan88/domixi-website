@@ -48,22 +48,4 @@ export const brand = {
     { q: "有速率限制吗？", a: "默认每个令牌 60 RPM。企业客户可联系客服提升限额。" },
     { q: "如何开发票？", a: "企业用户累计充值满 500 元可申请增值税普通发票，联系 support 邮箱办理。" },
   ],
-
-  codeExample: `from openai import OpenAI
-
-client = OpenAI(
-    api_key="sk-xxxxxxxxxxxxxxxx",   # 控制台生成的令牌
-    base_url="https://token-service.ai-domixi.com/v1"
-)
-
-resp = client.chat.completions.create(
-    model="claude-sonnet-4-5",       # 想换模型？改这一行就够
-    messages=[{"role": "user", "content": "你好"}]
-)
-print(resp.choices[0].message.content)`,
-
-  curlExample: `curl https://token-service.ai-domixi.com/v1/chat/completions \\
-  -H "Authorization: Bearer sk-你的密钥" \\
-  -H "Content-Type: application/json" \\
-  -d '{"model": "deepseek-v4", "messages": [{"role": "user", "content": "你好"}]}'`,
 };

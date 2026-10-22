@@ -156,6 +156,11 @@ export default {
     },
     exampleMessage: "こんにちは",
   },
+  code: {
+    pyApiKeyComment: "# コンソールで作成したトークン",
+    pyModelComment: "# モデルを変えるならこの行だけ",
+    userMessage: "こんにちは",
+  },
   legal: {
     updatedPrefix: "最終更新日：",
   },

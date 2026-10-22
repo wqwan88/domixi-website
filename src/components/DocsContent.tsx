@@ -2,6 +2,7 @@ import { type Lang, getDict, consoleHref } from "@/lib/i18n";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { brand } from "@/lib/brand";
+import { pythonExample, curlExample } from "@/lib/code-examples";
 import ScalarDocs from "@/components/ScalarDocs";
 
 export default function DocsContent({ lang }: { lang: Lang }) {
@@ -55,10 +56,10 @@ export default function DocsContent({ lang }: { lang: Lang }) {
         </div>
 
         <h2 className="text-xl font-semibold mb-4">{t.docs.pythonExample}</h2>
-        <pre className="codeblock p-5 overflow-x-auto text-white/85 mb-10">{brand.codeExample}</pre>
+        <pre className="codeblock p-5 overflow-x-auto text-white/85 mb-10">{pythonExample(lang)}</pre>
 
         <h2 className="text-xl font-semibold mb-4">{t.docs.curlExample}</h2>
-        <pre className="codeblock p-5 overflow-x-auto text-white/85 mb-10">{brand.curlExample}</pre>
+        <pre className="codeblock p-5 overflow-x-auto text-white/85 mb-10">{curlExample(lang)}</pre>
 
         <h2 className="text-xl font-semibold mb-4">{t.docs.videoTitle}</h2>
         <p className="text-white/50 text-sm mb-4">{t.docs.videoDesc}</p>

@@ -155,6 +155,11 @@ export default {
     },
     exampleMessage: "Hello",
   },
+  code: {
+    pyApiKeyComment: "# token issued by the console",
+    pyModelComment: "# want another model? just change this line",
+    userMessage: "Hello",
+  },
   legal: {
     updatedPrefix: "Last updated: ",
   },

@@ -156,6 +156,11 @@ export default {
     },
     exampleMessage: "Xin chào",
   },
+  code: {
+    pyApiKeyComment: "# token tạo trong console",
+    pyModelComment: "# muốn đổi mô hình? chỉ sửa dòng này",
+    userMessage: "Xin chào",
+  },
   legal: {
     updatedPrefix: "Cập nhật lần cuối: ",
   },

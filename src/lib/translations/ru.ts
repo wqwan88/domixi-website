@@ -156,6 +156,11 @@ export default {
     },
     exampleMessage: "Привет",
   },
+  code: {
+    pyApiKeyComment: "# токен, созданный в консоли",
+    pyModelComment: "# нужна другая модель? измените эту строку",
+    userMessage: "Привет",
+  },
   legal: {
     updatedPrefix: "Последнее обновление: ",
   },

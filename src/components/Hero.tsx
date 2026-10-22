@@ -1,5 +1,5 @@
 import { type Lang, getDict, langPath, consoleHref } from "@/lib/i18n";
-import { brand } from "@/lib/brand";
+import { curlExample } from "@/lib/code-examples";
 
 export default function Hero({ lang }: { lang: Lang }) {
   const t = getDict(lang);
@@ -50,7 +50,7 @@ export default function Hero({ lang }: { lang: Lang }) {
           <pre className="text-white/85 whitespace-pre text-sm">
             <span className="text-white/40">{t.hero.codeComment}</span>
             {"\n"}
-            {brand.curlExample.split('\n').slice(0, 3).join('\n')}
+            {curlExample(lang).split('\n').slice(0, 3).join('\n')}
           </pre>
         </div>
       </div>
